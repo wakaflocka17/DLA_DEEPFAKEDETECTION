@@ -1,3 +1,6 @@
+# Escludi il dataset
+data/
+data/*
 openforensics_env/
 openforensics_env/
 __pycache__/
