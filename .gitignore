@@ -7,3 +7,7 @@ openforensics_env/
 __pycache__/
 .DS_Store
 *.pyc
+openforensics_env/
+__pycache__/
+.DS_Store
+*.pyc
