@@ -1,26 +1,34 @@
-# 🕵🏻‍♂️ DLA DEEPFAKE DETECTION 2024/25 - UNICA
+# 🕵🏻‍♂️ DLA DEEPFAKE DETECTION 2024/25 - UNICA  
 **Progetto di rilevazione Deepfake con il dataset OpenForensics**  
 
 ## 🧑🏻‍🎓 Students  
-#### Francesco Congiu
-> Matricola: 60/73/65300
->
->> E-Mail: f.congiu38@studenti.unica.it
+#### Francesco Congiu  
+> Matricola: 60/73/65300  
+>  
+>> E-Mail: f.congiu38@studenti.unica.it  
 
-#### Simone Giuffrida
-> Matricola: 60/73/65301
->
->> E-Mail: s.giuffrida2@studenti.unica.it
+#### Simone Giuffrida  
+> Matricola: 60/73/65301  
+>  
+>> E-Mail: s.giuffrida2@studenti.unica.it  
 
-#### Fabio Littera
-> Matricola: 60/73/65310
->
->> E-Mail: f.littera3@studenti.unica.it
+#### Fabio Littera  
+> Matricola: 60/73/65310  
+>  
+>> E-Mail: f.littera3@studenti.unica.it  
+
+---
 
 ## 📌 Descrizione  
 Questo repository contiene il codice per l'addestramento e la valutazione di modelli di deepfake detection utilizzando il dataset **OpenForensics**. Il progetto prevede due approcci:  
 1. **Transfer Learning** con modelli pre-addestrati (es. MobileNet, Xception).  
 2. **Training from Scratch** con una rete personalizzata.  
+
+---
+
+## 📥 Download del Dataset  
+Il dataset **OpenForensics** necessario per il progetto può essere scaricato dal seguente link:  
+🔗 **[OpenForensics Dataset - Zenodo](https://zenodo.org/records/5528418)**  
 
 ---
 
