@@ -1,5 +1,6 @@
 # Escludi il dataset
 data/
+processed_data/
 data/*
 openforensics_env/
 openforensics_env/
