@@ -71,12 +71,16 @@ Se non ci sono errori, il setup è completato! 🎯
 
 ---
 
-## 📂 Struttura del Progetto
+## 📂 Struttura del Progetto  
 ```plaintext
 DLA_DEEPFAKEDETECTION/
-│── data/               # Dataset OpenForensics
-│── models/             # Modelli salvati
-│── scripts/            # Script Python per training e preprocessing
+│── data/               # Dataset OpenForensics (originale)
+│── processed_data/     # Output di preprocessing (volti ritagliati)
+│   ├── real/
+│   └── fake/
+│── documentation/     # Documenti, relazioni, materiale extra
+│── models/             # Modelli salvati (es. file .pth)
+│── scripts/            # Script Python (training, preprocessing, ecc.)
 │── notebooks/          # Jupyter Notebook per debugging e test
 │── requirements.txt    # Dipendenze del progetto
 │── README.md           # Documentazione del progetto
