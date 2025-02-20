@@ -82,7 +82,7 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_root", type=str, default="data/cropped_faces",
+    parser.add_argument("--data_root", type=str, default="processed_data",
                         help="Cartella con /real e /fake")
     parser.add_argument("--batch_size", type=int, default=32)
     args = parser.parse_args()

@@ -1,4 +1,5 @@
 filelock==3.13.1
+opencv-python==4.8.0.76
 fsspec==2024.6.1
 Jinja2==3.1.4
 MarkupSafe==2.1.5
@@ -11,3 +12,7 @@ torch==2.2.2
 torchaudio==2.2.2
 torchvision==0.17.2
 typing_extensions==4.12.2
+
+# Download dataset
+requests==2.31.0
+tqdm==4.66.1

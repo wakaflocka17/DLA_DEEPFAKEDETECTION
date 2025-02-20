@@ -76,7 +76,7 @@ def main():
                         help="Path al file JSON con bounding box e label")
     parser.add_argument("--images_root", type=str, required=True,
                         help="Cartella con le immagini originali")
-    parser.add_argument("--output_root", type=str, default="data/cropped_faces",
+    parser.add_argument("--output_root", type=str, default="processed_data",
                         help="Cartella dove salvare i volti ritagliati")
     args = parser.parse_args()
 
