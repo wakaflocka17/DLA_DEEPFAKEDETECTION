@@ -26,7 +26,7 @@ def download_file_from_zenodo(url, output_path):
 if __name__ == "__main__":
     # Esempio di link: la pagina Zenodo in questione può rimandare a un file .zip/.tar
     # Verifica l'URL diretto del file .zip e sostituisci "DOWNLOAD_URL"
-    DOWNLOAD_URL = "https://zenodo.org/record/5528418/files/openforensics_dataset_part1.zip"
+    DOWNLOAD_URL = "https://zenodo.org/api/records/5528418/files-archive"
     
     # Nome file in output
     OUTPUT_FILE = os.path.join("data", "openforensics_dataset_part1.zip")
