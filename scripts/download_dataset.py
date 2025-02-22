@@ -4,8 +4,7 @@ import os
 
 def download_file_from_zenodo(url, output_path):
     """
-    Scarica un file di grandi dimensioni da Zenodo (o un generico URL)
-    mostrando una barra di avanzamento.
+    Scarica il dataset utilizzato da Zenodo
     """
     response = requests.get(url, stream=True)
     total_size_in_bytes= int(response.headers.get('content-length', 0))
@@ -24,8 +23,7 @@ def download_file_from_zenodo(url, output_path):
         print("ERRORE: Download incompleto.")
 
 if __name__ == "__main__":
-    # Esempio di link: la pagina Zenodo in questione può rimandare a un file .zip/.tar
-    # Verifica l'URL diretto del file .zip e sostituisci "DOWNLOAD_URL"
+    # la pagina Zenodo in questione rimanda a un file .zip/.tar
     DOWNLOAD_URL = "https://zenodo.org/api/records/5528418/files-archive"
     
     # Nome file in output

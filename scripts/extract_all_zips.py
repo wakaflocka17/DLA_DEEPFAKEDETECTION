@@ -6,10 +6,10 @@ def extract_all_zips(input_dir, output_dir):
     """
     Estrae tutti i file .zip in input_dir, salvandone il contenuto in output_dir.
     """
-    # Assicurati che la cartella di destinazione esista
+    # Controllo per verificare che la cartella di destinazione esista
     os.makedirs(output_dir, exist_ok=True)
 
-    # Itera su tutti i file nella cartella di input
+    # Iterazione su tutti i file nella cartella di input
     for filename in os.listdir(input_dir):
         if filename.lower().endswith(".zip"):
             zip_path = os.path.join(input_dir, filename)
