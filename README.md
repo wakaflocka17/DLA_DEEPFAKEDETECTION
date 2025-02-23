@@ -127,6 +127,46 @@ python -c "import cv2; print(cv2.__version__)"
 ```
 If no errors appear, the setup is complete! 🎯
 
+---
+
+## 🛠️ Test the DataLoader
+Before training, verify that the dataset is correctly loaded:
+```python
+scripts/dataloader.py --dataset Train --batch_size 32
+```
+💡 This should display a batch of `images` and `labels`.
+
+## 🎯 Train the Model
+Train the model using either `MobileNet` or `Xception`: <br> <br>
+✅ Train with `MobileNet`:
+```python
+scripts/train.py --model mobilenet
+```
+✅ Train with `Xception`:
+```python
+scripts/train.py --model xception
+```
+💡 The trained model will be saved in the `models/` directory.
+
+## 📊 Evaluate the Model
+After training, evaluate the model on `Test-Dev` and `Test-Challenge`: <br> <br>
+✅ Evaluate **MobileNet** on `Test-Dev`:
+```python
+scripts/evaluate.py --model mobilenet --dataset Test-Dev
+```
+✅ Evaluate **MobileNet** on `Test-Challenge`:
+```python
+scripts/evaluate.py --model mobilenet --dataset Test-Challenge
+```
+✅ Evaluate **Xception** on `Test-Dev`:
+```python
+scripts/evaluate.py --model xception --dataset Test-Dev
+```
+✅ Evaluate **Xception** on `Test-Challenge`:
+```python
+scripts/evaluate.py --model xception --dataset Test-Challenge
+```
+💡 The script will print **Accuracy**, **Precision**, **Recall**, and **F1-score**.
 
 ---
 
@@ -161,7 +201,7 @@ DLA_DEEPFAKEDETECTION/
 │── utils/              # Generic utilities and support functions
 │── requirements.txt    # Project dependencies
 │── setup_folders.sh    # Script for automatic creation of folders
-│── README.md           # Documentazione del progetto
+│── README.md           # Project documentation
 ```
 
 ## 📊 Project Goals
