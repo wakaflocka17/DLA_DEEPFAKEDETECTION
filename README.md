@@ -107,14 +107,16 @@ After downloading, extract all ZIP files:
 ```python
 scripts/extract_all_zips.py --input_dir data --output_dir data
 ```
-💡 This will extract all dataset partitions into the data/ directory.
+💡 This will:
+- Extract the .zip files (Train_part_*.zip, etc.) into data/Train/Train, data/Val/Val, etc.
+- Place the corresponding .json files (e.g., Train_poly.json) into data/Train, data/Val, etc.
 
 ### **7️⃣ Extract Faces from the Dataset**
 Run the following script to extract and preprocess faces:
 ```python
 scripts/extract_faces.py
 ```
-This will process Train, Validation, Test-Dev, and Test-Challenge in one go.
+Faces will be saved into processed_data/<SPLIT>/real and processed_data/<SPLIT>/fake.
 
 
 ### **8️⃣ Verify Installation**
