@@ -48,7 +48,7 @@ git clone https://github.com/wakaflocka17/DLA_DEEPFAKEDETECTION.git
 cd DLA_DEEPFAKEDETECTION
 ```
 
-### **2️⃣ Create and Activate a Virtual Environment
+### **2️⃣ Create and Activate a Virtual Environment**
 It is recommended to create a virtual environment to isolate dependencies:
 ```bash
 python3 -m venv openforensics_env
@@ -64,6 +64,10 @@ pip install -r requirements.txt
 
 ### **4️⃣ Set Up the Project Structure**
 Run the following script to create the required folders:
+```bash
+chmod +x setup_folders.sh
+```
+First, however, we make the script executable with the command:
 ```bash
 setup_folders.sh
 ```
