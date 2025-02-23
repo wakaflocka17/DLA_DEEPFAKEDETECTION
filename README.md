@@ -54,7 +54,7 @@ It is recommended to create a virtual environment to isolate dependencies:
 python3 -m venv openforensics_env
 source openforensics_env/bin/activate  # macOS/Linux
 ```
-(On Windows, use: openforensics_env\Scripts\activate)
+(On Windows, use: `openforensics_env\Scripts\activate`)
 
 ### **3️⃣ Install Dependencies**
 Install all necessary libraries:
@@ -108,15 +108,15 @@ After downloading, extract all ZIP files:
 scripts/extract_all_zips.py --input_dir data --output_dir data
 ```
 💡 This will:
-- Extract the .zip files (Train_part_*.zip, etc.) into data/Train/Train, data/Val/Val, etc.
-- Place the corresponding .json files (e.g., Train_poly.json) into data/Train, data/Val, etc.
+- Extract the `.zip` files (Train_part_*.zip, etc.) into `data/Train/Train`, `data/Val/Val`, etc.
+- Place the corresponding `.json` files (e.g., Train_poly.json) into `data/Train`, `data/Val`, etc.
 
 ### **7️⃣ Extract Faces from the Dataset**
 Run the following script to extract and preprocess faces:
 ```python
 scripts/extract_faces.py
 ```
-Faces will be saved into processed_data/<SPLIT>/real and processed_data/<SPLIT>/fake.
+Faces will be saved into `processed_data/<SPLIT>/real` and `processed_data/<SPLIT>/fake`.
 
 
 ### **8️⃣ Verify Installation**
