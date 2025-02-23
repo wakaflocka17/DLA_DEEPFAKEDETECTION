@@ -62,7 +62,58 @@ Install all necessary libraries:
 pip install -r requirements.txt
 ```
 
-### **4️⃣ V4️⃣ Verify Installation**
+### **4️⃣ Set Up the Project Structure**
+Run the following script to create the required folders:
+```bash
+setup_folders.sh
+```
+This will create:
+```plaintext
+DLA_DEEPFAKEDETECTION/
+│── data/
+│   ├── Train/
+│   ├── Val/
+│   ├── Test-Dev/
+│   ├── Test-Challenge/
+│   ├── dataset/
+│
+│── processed_data/
+│   ├── Train/
+│   │   ├── real/
+│   │   ├── fake/
+│   ├── Val/
+│   │   ├── real/
+│   │   ├── fake/
+│   ├── Test-Dev/
+│   │   ├── real/
+│   │   ├── fake/
+│   ├── Test-Challenge/
+│   │   ├── real/
+```
+
+### **5️⃣ Download the Dataset**
+To automatically download the OpenForensics dataset, use the provided script:
+```python
+scripts/download_dataset.py
+```
+💡 Ensure you have a stable internet connection, as the dataset is large (60GB+).
+
+### **6️⃣ Extract the Dataset**
+After downloading, extract all ZIP files:
+```python
+scripts/extract_all_zips.py --input_dir data --output_dir data
+```
+💡 This will extract all dataset partitions into the data/ directory.
+
+### **7️⃣ Extract Faces from the Dataset**
+Run the following script to extract and preprocess faces:
+```python
+scripts/extract_faces.py
+```
+This will process Train, Validation, Test-Dev, and Test-Challenge in one go.
+
+
+### **8️⃣ Verify Installation**
 To check if everything works correctly, run:
 ```bash
 python -c "import torch; print(torch.__version__)"
@@ -76,19 +127,38 @@ If no errors appear, the setup is complete! 🎯
 ## 📂 Project Structure  
 ```plaintext
 DLA_DEEPFAKEDETECTION/
-│── data/               # Dataset OpenForensics (originale)
-│── processed_data/     # Output di preprocessing (volti ritagliati)
-│   ├── real/
-│   └── fake/
-│── documentation/     # Documenti, relazioni, materiale extra
-│── models/             # Modelli salvati (es. file .pth)
-│── scripts/            # Script Python (training, preprocessing, ecc.)
-│── notebooks/          # Jupyter Notebook per debugging e test
-│── requirements.txt    # Dipendenze del progetto
+│── data/               # Dataset OpenForensics (originale, non modificato)
+│   ├── Train/          # Training Data
+│   ├── Val/            # Evaluation Data
+│   ├── Test-Dev/       # Test-Dev Data
+│   ├── Test-Challenge/ # Test-Challenge Data
+│   ├── dataset/        # How to save the original dataset
+│
+│── processed_data/     # Preprocessing output (cropped faces)
+│   ├── Train/
+│   │   ├── real/       # Real faces extracted from the training set
+│   │   ├── fake/       # Fake faces extracted from the training set
+│   ├── Val/
+│   │   ├── real/       # Real faces extracted for evaluation
+│   │   ├── fake/       # Fake faces extracted for evaluation
+│   ├── Test-Dev/
+│   │   ├── real/       # Real faces extracted for Test-Dev
+│   │   ├── fake/       # Fake faces extracted for Test-Dev
+│   ├── Test-Challenge/
+│   │   ├── real/       # Real faces extracted for Test-Challenge
+│   │   ├── fake/       # Fake faces extracted for Test-Challenge
+│
+│── documentation/      # Documentation, reports, extra material
+│── models/             # Saved models (es. file .pth)
+│── scripts/            # Scripts (training, preprocessing, ecc.)
+│── notebooks/          # Jupyter Notebook for debugging and testing
+│── utils/              # Generic utilities and support functions
+│── requirements.txt    # Project dependencies
+│── setup_folders.sh    # Script for automatic creation of folders
 │── README.md           # Documentazione del progetto
 ```
 
-## 📊 Obiettivi del Progetto  
+## 📊 Project Goals
 ✅ **Face extraction** from images using bounding boxes.  
 ✅ **Binary classification (fake/real)** of extracted faces.  
 ✅ **Training with transfer learning** using MobileNet or Xception.  
