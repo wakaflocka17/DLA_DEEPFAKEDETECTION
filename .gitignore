@@ -1,7 +1,10 @@
 # Escludi il dataset
-data/
 processed_data/
-data/*
+data/dataset
+data/Train/*
+data/Test-Dev/*
+data/Val/*
+data/Test-Challenge/*
 venv/*
 openforensics_env/
 openforensics_env/
