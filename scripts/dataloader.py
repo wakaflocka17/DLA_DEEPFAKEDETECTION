@@ -1,5 +1,5 @@
 import os
-from PIL import Image
+from PIL import Image, UnidentifiedImageError
 import torch
 from torch.utils.data import Dataset, DataLoader
 import torchvision.transforms as T
@@ -9,7 +9,7 @@ class DeepfakeDataset(Dataset):
     """
     PyTorch dataset that loads cropped faces (real/fake).
     Example of folder structure:
-        data/cropped_faces/
+        processed_data/Train/
             ├── real/
             │   ├── face1.jpg
             │   └── face2.jpg
@@ -29,6 +29,9 @@ class DeepfakeDataset(Dataset):
         real_dir = os.path.join(root_dir, "real")
         fake_dir = os.path.join(root_dir, "fake")
         
+        if not os.path.exists(real_dir) or not os.path.exists(fake_dir):
+            raise ValueError(f"Error: The directories '{real_dir}' and/or '{fake_dir}' do not exist!")
+
         # Load all files from 'real'
         for fname in os.listdir(real_dir):
             if fname.lower().endswith((".jpg", ".png", ".jpeg")):
@@ -39,14 +42,21 @@ class DeepfakeDataset(Dataset):
             if fname.lower().endswith((".jpg", ".png", ".jpeg")):
                 self.samples.append((os.path.join(fake_dir, fname), 1))  # label=1 for fake
 
+        if len(self.samples) == 0:
+            raise ValueError(f"Error: No images found in {real_dir} or {fake_dir}!")
+
     def __len__(self):
         return len(self.samples)
     
     def __getitem__(self, idx):
         img_path, label = self.samples[idx]
         
-        image = Image.open(img_path).convert("RGB")
-        
+        try:
+            image = Image.open(img_path).convert("RGB")
+        except UnidentifiedImageError:
+            print(f"Warning: Unable to open {img_path}. Skipping...")
+            return self.__getitem__((idx + 1) % len(self.samples))  # Skip corrupted image
+
         if self.transform is not None:
             image = self.transform(image)
         
@@ -82,17 +92,18 @@ def main():
     import argparse
 
     parser = argparse.ArgumentParser()
-    parser.add_argument("--data_root", type=str, default="processed_data",
-                        help="Folder containing /real and /fake")
-    parser.add_argument("--batch_size", type=int, default=32)
+    parser.add_argument("--dataset", type=str, choices=["Train", "Val", "Test-Dev", "Test-Challenge"], required=True,
+                        help="Dataset to load: 'Train', 'Val', 'Test-Dev', 'Test-Challenge'")
+    parser.add_argument("--batch_size", type=int, default=32, help="Batch size for training")
     args = parser.parse_args()
     
+    data_root = f"processed_data/{args.dataset}"
+    
     # Create a test dataloader
-    loader = create_dataloader(args.data_root, batch_size=args.batch_size)
+    loader = create_dataloader(data_root, batch_size=args.batch_size)
     
     for images, labels in loader:
-        print("Batch of images:", images.shape)
-        print("Batch of labels:", labels)
+        print(f"Loaded batch from {args.dataset} → Images: {images.shape}, Labels: {labels}")
         break  # Example: exit the loop after one batch
 
 if __name__ == "__main__":
