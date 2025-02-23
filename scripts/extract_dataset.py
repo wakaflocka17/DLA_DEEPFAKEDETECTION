@@ -1,57 +1,87 @@
 import os
 import zipfile
 import argparse
-from pathlib import Path
+import shutil
 
-def extract_dataset(zip_path, output_dir, check_dir):
+def extract_dataset(dataset_dir):
     """
-    Extracts the dataset zip file into the specified folder
-    and checks for the presence of `real` and `fake` in another folder.
+    Legge tutti i file in dataset_dir e, in base al nome, li colloca
+    nelle cartelle corrispondenti:
+      - Train_part_*.zip      -> estrai in data/Train/Train
+      - Train_poly.json       -> sposta in data/Train
+      - Val_part_*.zip        -> estrai in data/Val/Val
+      - Val_poly.json         -> sposta in data/Val
+      - Test-Dev_part_*.zip   -> estrai in data/Test-Dev/Test-Dev
+      - Test-Dev_poly.json    -> sposta in data/Test-Dev
+      - Test-Challenge_part_*.zip  -> estrai in data/Test-Challenge/Test-Challenge
+      - Test-Challenge_poly.json   -> sposta in data/Test-Challenge
+    """
+    
+    # Definiamo le cartelle di destinazione
+    base_data_dir = "data"
+    train_dir = os.path.join(base_data_dir, "Train")
+    val_dir = os.path.join(base_data_dir, "Val")
+    test_dev_dir = os.path.join(base_data_dir, "Test-Dev")
+    test_challenge_dir = os.path.join(base_data_dir, "Test-Challenge")
+    
+    # Creiamo eventuali sottocartelle mancanti
+    os.makedirs(os.path.join(train_dir, "Train"), exist_ok=True)
+    os.makedirs(os.path.join(val_dir, "Val"), exist_ok=True)
+    os.makedirs(os.path.join(test_dev_dir, "Test-Dev"), exist_ok=True)
+    os.makedirs(os.path.join(test_challenge_dir, "Test-Challenge"), exist_ok=True)
+    
+    # Scansiona tutti i file in dataset_dir
+    for filename in os.listdir(dataset_dir):
+        filepath = os.path.join(dataset_dir, filename)
 
-    Args:
-        zip_path (str): path to the zip file
-        output_dir (str): destination folder for extraction
-        check_dir (str): path where the real/fake folders should be found
-    """
-    # Create the output folder if it doesn't exist
-    os.makedirs(output_dir, exist_ok=True)
-    
-    print(f"Extracting dataset from {zip_path} to {output_dir}...")
-    
-    try:
-        # Extract the zip file into output_dir
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-            zip_ref.extractall(output_dir)
-        print("Extraction completed successfully!")
-        
-        # If you want to check the presence of real/fake in another folder
-        data_dir = Path(check_dir)
-        real_dir = data_dir / "real"
-        fake_dir = data_dir / "fake"
-        
-        if not (real_dir.exists() and fake_dir.exists()):
-            print("\nWARNING: The 'real' and/or 'fake' folders were not found.")
-            print("Make sure the zip file contains the correct structure:")
-            print(f"  {check_dir}/")
-            print("    ├── real/")
-            print("    └── fake/")
+        if os.path.isfile(filepath):
+            # Controlliamo prefisso e/o estensione
+            if filename.startswith("Train_part_") and filename.endswith(".zip"):
+                # Esempio: "Train_part_1.zip"
+                extract_zip(filepath, os.path.join(train_dir, "Train"))
             
-    except zipfile.BadZipFile:
-        print("Error: The zip file appears to be corrupted or invalid.")
-    except Exception as e:
-        print(f"Error during extraction: {str(e)}")
+            elif filename.startswith("Train_poly") and filename.endswith(".json"):
+                # Esempio: "Train_poly.json"
+                shutil.copy(filepath, train_dir)
+
+            elif filename.startswith("Val_part_") and filename.endswith(".zip"):
+                extract_zip(filepath, os.path.join(val_dir, "Val"))
+
+            elif filename.startswith("Val_poly") and filename.endswith(".json"):
+                shutil.copy(filepath, val_dir)
+
+            elif filename.startswith("Test-Dev_part_") and filename.endswith(".zip"):
+                extract_zip(filepath, os.path.join(test_dev_dir, "Test-Dev"))
+
+            elif filename.startswith("Test-Dev_poly") and filename.endswith(".json"):
+                shutil.copy(filepath, test_dev_dir)
+
+            elif filename.startswith("Test-Challenge_part_") and filename.endswith(".zip"):
+                extract_zip(filepath, os.path.join(test_challenge_dir, "Test-Challenge"))
+
+            elif filename.startswith("Test-Challenge_poly") and filename.endswith(".json"):
+                shutil.copy(filepath, test_challenge_dir)
+
+            else:
+                print(f"Skipping file (unrecognized): {filename}")
+
+def extract_zip(zip_path, dest_dir):
+    """
+    Estrae lo zip in dest_dir
+    """
+    print(f"Extracting {os.path.basename(zip_path)} -> {dest_dir}")
+    with zipfile.ZipFile(zip_path, 'r') as zf:
+        zf.extractall(dest_dir)
+    print("Extraction done.\n")
 
 def main():
-    parser = argparse.ArgumentParser(description="Extracts the dataset zip file and checks the real/fake folder structure")
-    parser.add_argument("--zip_path", type=str, required=True,
-                        help="Path to the dataset zip file")
-    parser.add_argument("--output_dir", type=str, default="data",
-                        help="Destination folder for extraction (default: data)")
-    parser.add_argument("--check_dir", type=str, default="processed_data",
-                        help="Folder where to verify the presence of real/ and fake/ (default: processed_data)")
-    
+    parser = argparse.ArgumentParser(description="Extract and place the dataset partitions into the correct subfolders.")
+    parser.add_argument("--dataset_dir", type=str, default="data/dataset",
+                        help="Directory containing the downloaded ZIP/JSON files (default: data/dataset)")
     args = parser.parse_args()
-    extract_dataset(args.zip_path, args.output_dir, args.check_dir)
+
+    extract_dataset(args.dataset_dir)
+    print("✅ All dataset files have been distributed correctly.")
 
 if __name__ == "__main__":
     main()
