@@ -1,12 +1,10 @@
 import torch
 import torch.nn as nn
 import torch.optim as optim
-from torch.utils.data import DataLoader
-from torchvision import transforms
-from tqdm import tqdm  # Import per la barra di avanzamento
+from tqdm import tqdm  # Barra di avanzamento
 import os
 
-from scripts.dataloader import create_dataloader
+from dataloader import create_dataloader
 from deepfake_classifier import get_model
 
 # Training parameters
@@ -21,9 +19,9 @@ def train(model_name="mobilenet"):
     :param model_name: 'mobilenet' or 'xception'
     """
 
-    # Load dataset
-    train_loader = create_dataloader("processed_data/Train", batch_size=BATCH_SIZE)
-    val_loader = create_dataloader("processed_data/Val", batch_size=BATCH_SIZE, shuffle=False)
+    # Load dataset (corrected paths!)
+    train_loader = create_dataloader("processed_data/train_cropped", batch_size=BATCH_SIZE)
+    val_loader = create_dataloader("processed_data/val_cropped", batch_size=BATCH_SIZE, shuffle=False)
 
     # Load model
     model = get_model(model_name).to(DEVICE)
@@ -51,8 +49,6 @@ def train(model_name="mobilenet"):
             optimizer.step()
 
             running_loss += loss.item()
-
-            # Aggiorna tqdm con la loss media
             progress_bar.set_postfix(loss=f"{loss.item():.4f}")
 
         avg_loss = running_loss / len(train_loader)

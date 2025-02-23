@@ -8,8 +8,8 @@ import torchvision.transforms as T
 class DeepfakeDataset(Dataset):
     """
     PyTorch dataset that loads cropped faces (real/fake).
-    Example of folder structure:
-        processed_data/Train/
+    Example folder structure:
+        processed_data/train_cropped/
             ├── real/
             │   ├── face1.jpg
             │   └── face2.jpg
@@ -25,7 +25,7 @@ class DeepfakeDataset(Dataset):
         
         self.samples = []
         
-        # Real and fake folders
+        # Adjust for lowercase directory names
         real_dir = os.path.join(root_dir, "real")
         fake_dir = os.path.join(root_dir, "fake")
         
@@ -97,8 +97,9 @@ def main():
     parser.add_argument("--batch_size", type=int, default=32, help="Batch size for training")
     args = parser.parse_args()
     
-    data_root = f"processed_data/{args.dataset}"
-    
+    # Adjust dataset name for correct folder path
+    data_root = f"processed_data/{args.dataset.lower()}_cropped"
+
     # Create a test dataloader
     loader = create_dataloader(data_root, batch_size=args.batch_size)
     

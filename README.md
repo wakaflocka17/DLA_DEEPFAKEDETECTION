@@ -132,7 +132,7 @@ If no errors appear, the setup is complete! 🎯
 ## 🛠️ Test the DataLoader
 Before training, verify that the dataset is correctly loaded:
 ```python
-scripts/dataloader.py --dataset Train --batch_size 32
+python scripts/dataloader.py --dataset Train --batch_size 32
 ```
 💡 This should display a batch of `images` and `labels`.
 
@@ -140,11 +140,11 @@ scripts/dataloader.py --dataset Train --batch_size 32
 Train the model using either `MobileNet` or `Xception`: <br> <br>
 ✅ Train with `MobileNet`:
 ```python
-scripts/train.py --model mobilenet
+python scripts/train.py --model mobilenet
 ```
 ✅ Train with `Xception`:
 ```python
-scripts/train.py --model xception
+python scripts/train.py --model xception
 ```
 💡 The trained model will be saved in the `models/` directory.
 
@@ -152,19 +152,19 @@ scripts/train.py --model xception
 After training, evaluate the model on `Test-Dev` and `Test-Challenge`: <br> <br>
 ✅ Evaluate **MobileNet** on `Test-Dev`:
 ```python
-scripts/evaluate.py --model mobilenet --dataset Test-Dev
+python scripts/evaluate.py --model mobilenet --dataset Test-Dev
 ```
 ✅ Evaluate **MobileNet** on `Test-Challenge`:
 ```python
-scripts/evaluate.py --model mobilenet --dataset Test-Challenge
+python scripts/evaluate.py --model mobilenet --dataset Test-Challenge
 ```
 ✅ Evaluate **Xception** on `Test-Dev`:
 ```python
-scripts/evaluate.py --model xception --dataset Test-Dev
+python scripts/evaluate.py --model xception --dataset Test-Dev
 ```
 ✅ Evaluate **Xception** on `Test-Challenge`:
 ```python
-scripts/evaluate.py --model xception --dataset Test-Challenge
+python scripts/evaluate.py --model xception --dataset Test-Challenge
 ```
 💡 The script will print **Accuracy**, **Precision**, **Recall**, and **F1-score**.
 
