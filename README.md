@@ -105,7 +105,7 @@ scripts/download_dataset.py
 ### **6️⃣ Extract the Dataset**
 After downloading, extract all ZIP files:
 ```python
-scripts/extract_all_zips.py --input_dir data --output_dir data
+python3 scripts/extract_all_zips.py --input_dir data/dataset --output_dir data
 ```
 💡 This will:
 - Extract the `.zip` files (Train_part_*.zip, etc.) into `data/Train/Train`, `data/Val/Val`, etc.
