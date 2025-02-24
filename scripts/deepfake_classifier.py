@@ -1,6 +1,11 @@
+import ssl
 import torch
+import torch.nn as nn  # Aggiungi questa riga
 import torchvision.models as models
-import torch.nn as nn
+import timm
+
+# Aggiungi questa riga all'inizio del file, prima di qualsiasi altra operazione di rete
+ssl._create_default_https_context = ssl._create_unverified_context
 
 def get_model(model_name="mobilenet", num_classes=2):
     """
@@ -16,9 +21,10 @@ def get_model(model_name="mobilenet", num_classes=2):
         model.classifier[1] = nn.Linear(in_features, num_classes)
 
     elif model_name == "xception":
-        model = models.xception(pretrained=True)
-        in_features = model.fc.in_features
-        model.fc = nn.Linear(in_features, num_classes)
+        # Utilizziamo timm per il modello Xception
+        model = timm.create_model('xception', pretrained=True)
+        # Modifica l'ultimo layer per la classificazione binaria
+        model.fc = nn.Linear(model.fc.in_features, num_classes)
 
     else:
         raise ValueError("Invalid model name. Choose 'mobilenet' or 'xception'.")

@@ -44,7 +44,7 @@ def extract_dataset(dataset_dir):
                 # Esempio: "Train_poly.json"
                 shutil.copy(filepath, train_dir)
 
-            elif filename.startswith("Val_part_") and filename.endswith(".zip"):
+            elif filename.startswith("Val") and filename.endswith(".zip"):
                 extract_zip(filepath, os.path.join(val_dir, "Val"))
 
             elif filename.startswith("Val_poly") and filename.endswith(".json"):
