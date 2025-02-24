@@ -19,3 +19,11 @@ tqdm==4.66.1
 
 # Machine Learning Metrics
 scikit-learn==1.3.0
+
+# PyTorch Image Models (for Xception and other architectures)
+timm==0.9.10
+
+# Data Analysis and Visualization
+pandas==2.1.4
+seaborn==0.13.0
+matplotlib==3.8.2
