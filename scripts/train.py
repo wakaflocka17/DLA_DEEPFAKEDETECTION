@@ -24,7 +24,7 @@ def train(model_name="mobilenet"):
     val_loader = create_dataloader("processed_data/val_cropped", batch_size=BATCH_SIZE, shuffle=False)
 
     # Load model
-    model = get_model(model_name).to(DEVICE)
+    model = get_model(model_name).to(DEVICE) 
     
     # Loss & optimizer
     criterion = nn.CrossEntropyLoss()

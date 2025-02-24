@@ -1,0 +1,5 @@
+OpenForensics Dataset
+
+=========Trung-Nghia Le, Huy H. Nguyen, Junichi Yamagishi, Isao Echizen, "OpenForensics: Large-Scale Challenging Dataset For Multi-Face Forgery Detection And Segmentation In-The-Wild", ICCV, 2021. Project Page: https://sites.google.com/view/ltnghia/research/openforensicsSource Code: https://github.com/ltnghia/openforensicsDataset: https://zenodo.org/record/5528418
+
+=========If you use our datasets, codes or results, please cite the following publication: @ Inproceedings{ltnghia-ICCV2021,  Title          = {OpenForensics: Large-Scale Challenging Dataset For Multi-Face Forgery Detection And Segmentation In-The-Wild},  Author         = {Trung-Nghia Le and Huy H. Nguyen and Junichi Yamagishi and Isao Echizen},  BookTitle      = {International Conference on Computer Vision},  Year           = {2021}, }
