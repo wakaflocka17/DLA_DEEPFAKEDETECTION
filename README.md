@@ -63,11 +63,11 @@ pip install -r requirements.txt
 ```
 
 ### **4️⃣ Set Up the Project Structure**
-Run the following script to create the required folders:
+First, however, we make the script executable with the command:
 ```bash
 chmod +x setup_folders.sh
 ```
-First, however, we make the script executable with the command:
+Run the following script to create the required folders:
 ```bash
 setup_folders.sh
 ```
@@ -98,32 +98,44 @@ DLA_DEEPFAKEDETECTION/
 ### **5️⃣ Download the Dataset**
 To automatically download the OpenForensics dataset, use the provided script:
 ```python
-scripts/download_dataset.py
+python3 scripts/download_dataset.py
 ```
 💡 Ensure you have a stable internet connection, as the dataset is large (60GB+).
 
 ### **6️⃣ Extract the Dataset**
 After downloading, extract all ZIP files:
 ```python
-scripts/extract_all_zips.py --input_dir data --output_dir data
+python3 scripts/extract_all_zips.py --input_dir data/dataset --output_dir data
 ```
 💡 This will:
 - Extract the `.zip` files (Train_part_*.zip, etc.) into `data/Train/Train`, `data/Val/Val`, etc.
 - Place the corresponding `.json` files (e.g., Train_poly.json) into `data/Train`, `data/Val`, etc.
 
-### **7️⃣ Extract Faces from the Dataset**
-Run the following script to extract and preprocess faces:
+### **7️⃣ Move Images and JSON Files to Their Correct Directories**
+Now that all files have been extracted, we need to organize them into the correct dataset folders (Train, Val, Test-Dev, Test-Challenge).
+Run:
 ```python
-scripts/extract_faces.py
+python3 scripts/extract_dataset.py
 ```
-Faces will be saved into `processed_data/<SPLIT>/real` and `processed_data/<SPLIT>/fake`.
+💡 This will:
+- Move **training images** to `data/Train/Train/` and the corresponding `Train_poly.json` to `data/Train/`.
+- Move **validation images** to `data/Val/Val/` and `Val_poly.json` to `data/Val/`.
+- Move **test-dev images** to `data/Test-Dev/Test-Dev/` and `Test-Dev_poly.json` to `data/Test-Dev/`.
+- Move **test-challenge images** to `data/Test-Challenge/Test-Challenge/` and `Test-Challenge_poly.json` to `data/Test-Challenge/`.
 
+### **8️⃣ Delete Unnecessary ZIP Files**
+After extraction and organization, the original .zip files are no longer needed.
+Delete them using:
+```python
+python3 scripts/delete_all_zips.py
+```
+💡 This will clean up the dataset directory, saving storage space.
 
-### **8️⃣ Verify Installation**
+### **9️⃣ Verify Installation**
 To check if everything works correctly, run:
 ```bash
-python -c "import torch; print(torch.__version__)"
-python -c "import cv2; print(cv2.__version__)"
+python3 -c "import torch; print(torch.__version__)"
+python3 -c "import cv2; print(cv2.__version__)"
 ```
 If no errors appear, the setup is complete! 🎯
 
@@ -132,7 +144,7 @@ If no errors appear, the setup is complete! 🎯
 ## 🛠️ Test the DataLoader
 Before training, verify that the dataset is correctly loaded:
 ```python
-python scripts/dataloader.py --dataset Train --batch_size 32
+python3 scripts/dataloader.py --dataset Train --batch_size 32
 ```
 💡 This should display a batch of `images` and `labels`.
 
@@ -140,11 +152,11 @@ python scripts/dataloader.py --dataset Train --batch_size 32
 Train the model using either `MobileNet` or `Xception`: <br> <br>
 ✅ Train with `MobileNet`:
 ```python
-python scripts/train.py --model mobilenet
+python3 scripts/train.py --model mobilenet
 ```
 ✅ Train with `Xception`:
 ```python
-python scripts/train.py --model xception
+python3 scripts/train.py --model xception
 ```
 💡 The trained model will be saved in the `models/` directory.
 
@@ -152,19 +164,19 @@ python scripts/train.py --model xception
 After training, evaluate the model on `Test-Dev` and `Test-Challenge`: <br> <br>
 ✅ Evaluate **MobileNet** on `Test-Dev`:
 ```python
-python scripts/evaluate.py --model mobilenet --dataset Test-Dev
+python3 scripts/evaluate.py --model mobilenet --dataset Test-Dev
 ```
 ✅ Evaluate **MobileNet** on `Test-Challenge`:
 ```python
-python scripts/evaluate.py --model mobilenet --dataset Test-Challenge
+python3 scripts/evaluate.py --model mobilenet --dataset Test-Challenge
 ```
 ✅ Evaluate **Xception** on `Test-Dev`:
 ```python
-python scripts/evaluate.py --model xception --dataset Test-Dev
+python3 scripts/evaluate.py --model xception --dataset Test-Dev
 ```
 ✅ Evaluate **Xception** on `Test-Challenge`:
 ```python
-python scripts/evaluate.py --model xception --dataset Test-Challenge
+python3 scripts/evaluate.py --model xception --dataset Test-Challenge
 ```
 💡 The script will print **Accuracy**, **Precision**, **Recall**, and **F1-score**.
 
