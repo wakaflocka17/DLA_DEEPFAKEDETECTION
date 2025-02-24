@@ -98,7 +98,7 @@ DLA_DEEPFAKEDETECTION/
 ### **5️⃣ Download the Dataset**
 To automatically download the OpenForensics dataset, use the provided script:
 ```python
-scripts/download_dataset.py
+python3 scripts/download_dataset.py
 ```
 💡 Ensure you have a stable internet connection, as the dataset is large (60GB+).
 
@@ -111,11 +111,11 @@ python3 scripts/extract_all_zips.py --input_dir data/dataset --output_dir data
 - Extract the `.zip` files (Train_part_*.zip, etc.) into `data/Train/Train`, `data/Val/Val`, etc.
 - Place the corresponding `.json` files (e.g., Train_poly.json) into `data/Train`, `data/Val`, etc.
 
-### **7️⃣ Move Images and JSON Files to Their Correct Directories**
+### **7️⃣ Move Images and JSON Files to Their Correct Directories**
 Now that all files have been extracted, we need to organize them into the correct dataset folders (Train, Val, Test-Dev, Test-Challenge).
 Run:
 ```python
-python scripts/extract_dataset.py
+python3 scripts/extract_dataset.py
 ```
 💡 This will:
 - Move **training images** to `data/Train/Train/` and the corresponding `Train_poly.json` to `data/Train/`.
@@ -127,15 +127,15 @@ python scripts/extract_dataset.py
 After extraction and organization, the original .zip files are no longer needed.
 Delete them using:
 ```python
-python scripts/delete_all_zips.py
+python3 scripts/delete_all_zips.py
 ```
 💡 This will clean up the dataset directory, saving storage space.
 
 ### **9️⃣ Verify Installation**
 To check if everything works correctly, run:
 ```bash
-python -c "import torch; print(torch.__version__)"
-python -c "import cv2; print(cv2.__version__)"
+python3 -c "import torch; print(torch.__version__)"
+python3 -c "import cv2; print(cv2.__version__)"
 ```
 If no errors appear, the setup is complete! 🎯
 
@@ -144,7 +144,7 @@ If no errors appear, the setup is complete! 🎯
 ## 🛠️ Test the DataLoader
 Before training, verify that the dataset is correctly loaded:
 ```python
-python scripts/dataloader.py --dataset Train --batch_size 32
+python3 scripts/dataloader.py --dataset Train --batch_size 32
 ```
 💡 This should display a batch of `images` and `labels`.
 
@@ -152,11 +152,11 @@ python scripts/dataloader.py --dataset Train --batch_size 32
 Train the model using either `MobileNet` or `Xception`: <br> <br>
 ✅ Train with `MobileNet`:
 ```python
-python scripts/train.py --model mobilenet
+python3 scripts/train.py --model mobilenet
 ```
 ✅ Train with `Xception`:
 ```python
-python scripts/train.py --model xception
+python3 scripts/train.py --model xception
 ```
 💡 The trained model will be saved in the `models/` directory.
 
@@ -164,19 +164,19 @@ python scripts/train.py --model xception
 After training, evaluate the model on `Test-Dev` and `Test-Challenge`: <br> <br>
 ✅ Evaluate **MobileNet** on `Test-Dev`:
 ```python
-python scripts/evaluate.py --model mobilenet --dataset Test-Dev
+python3 scripts/evaluate.py --model mobilenet --dataset Test-Dev
 ```
 ✅ Evaluate **MobileNet** on `Test-Challenge`:
 ```python
-python scripts/evaluate.py --model mobilenet --dataset Test-Challenge
+python3 scripts/evaluate.py --model mobilenet --dataset Test-Challenge
 ```
 ✅ Evaluate **Xception** on `Test-Dev`:
 ```python
-python scripts/evaluate.py --model xception --dataset Test-Dev
+python3 scripts/evaluate.py --model xception --dataset Test-Dev
 ```
 ✅ Evaluate **Xception** on `Test-Challenge`:
 ```python
-python scripts/evaluate.py --model xception --dataset Test-Challenge
+python3 scripts/evaluate.py --model xception --dataset Test-Challenge
 ```
 💡 The script will print **Accuracy**, **Precision**, **Recall**, and **F1-score**.
 
