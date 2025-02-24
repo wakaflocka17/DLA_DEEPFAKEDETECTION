@@ -63,11 +63,11 @@ pip install -r requirements.txt
 ```
 
 ### **4️⃣ Set Up the Project Structure**
-Run the following script to create the required folders:
+First, however, we make the script executable with the command:
 ```bash
 chmod +x setup_folders.sh
 ```
-First, however, we make the script executable with the command:
+Run the following script to create the required folders:
 ```bash
 setup_folders.sh
 ```
