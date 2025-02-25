@@ -32,6 +32,18 @@ The **OpenForensics** dataset required for the project can be downloaded from th
 
 ---
 
+## 📄 **Documentation**  
+Below are links to the full project documentation:
+- 📚 [Theoretical Background](documentation/BACKGROUND.md)
+- 🛠 [Feature Extraction](documentation/FEATURE_EXTRACTION.md)
+- 📊 [Metadata Analysis](documentation/METADATA_ANALYSIS.md)
+- 🎯 [Fine Tuning of MobileNet and xCeption](documentation/FINE_TUNING.md)
+- 🏗 [Building a Network from the Ground Up](documentation/CUSTOM_NETWORK.md)
+
+📂 **[Cartella con tutta la documentazione](documentation/)**
+
+---
+
 ## 🚀 Installation  
 To run the project locally, follow these steps:
 
