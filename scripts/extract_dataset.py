@@ -23,13 +23,13 @@ def extract_dataset(dataset_dir):
     val_dir = os.path.join(base_data_dir, "Val")
     test_dev_dir = os.path.join(base_data_dir, "Test-Dev")
     test_challenge_dir = os.path.join(base_data_dir, "Test-Challenge")
-    
-    # Creiamo eventuali sottocartelle mancanti
-    os.makedirs(os.path.join(train_dir, "Train"), exist_ok=True)
-    os.makedirs(os.path.join(val_dir, "Val"), exist_ok=True)
-    os.makedirs(os.path.join(test_dev_dir, "Test-Dev"), exist_ok=True)
-    os.makedirs(os.path.join(test_challenge_dir, "Test-Challenge"), exist_ok=True)
-    
+
+    # Creiamo le sottocartelle corrette
+    os.makedirs(train_dir, exist_ok=True)
+    os.makedirs(val_dir, exist_ok=True)
+    os.makedirs(test_dev_dir, exist_ok=True)
+    os.makedirs(test_challenge_dir, exist_ok=True)
+
     # Scansiona tutti i file in dataset_dir
     for filename in os.listdir(dataset_dir):
         filepath = os.path.join(dataset_dir, filename)
@@ -38,26 +38,26 @@ def extract_dataset(dataset_dir):
             # Controlliamo prefisso e/o estensione
             if filename.startswith("Train_part_") and filename.endswith(".zip"):
                 # Esempio: "Train_part_1.zip"
-                extract_zip(filepath, os.path.join(train_dir, "Train"))
+                extract_zip(filepath,train_dir)
             
             elif filename.startswith("Train_poly") and filename.endswith(".json"):
                 # Esempio: "Train_poly.json"
                 shutil.copy(filepath, train_dir)
 
             elif filename.startswith("Val") and filename.endswith(".zip"):
-                extract_zip(filepath, os.path.join(val_dir, "Val"))
+                extract_zip(filepath,val_dir)
 
             elif filename.startswith("Val_poly") and filename.endswith(".json"):
                 shutil.copy(filepath, val_dir)
 
             elif filename.startswith("Test-Dev_part_") and filename.endswith(".zip"):
-                extract_zip(filepath, os.path.join(test_dev_dir, "Test-Dev"))
+                extract_zip(filepath,test_dev_dir)
 
             elif filename.startswith("Test-Dev_poly") and filename.endswith(".json"):
                 shutil.copy(filepath, test_dev_dir)
 
             elif filename.startswith("Test-Challenge_part_") and filename.endswith(".zip"):
-                extract_zip(filepath, os.path.join(test_challenge_dir, "Test-Challenge"))
+                extract_zip(filepath, test_challenge_dir)
 
             elif filename.startswith("Test-Challenge_poly") and filename.endswith(".json"):
                 shutil.copy(filepath, test_challenge_dir)
