@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-from tqdm import tqdm  # Barra di avanzamento
+from tqdm import tqdm  # Progress bar
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import numpy as np
 
@@ -29,7 +29,7 @@ def evaluate(model_name="mobilenet", dataset="Test-Dev"):
 
     print(f"\n🔍 Evaluating {model_name} on {dataset}...\n")
 
-    # Barra di avanzamento
+    # Progress bar
     progress_bar = tqdm(test_loader, desc="Evaluating", leave=True)
 
     with torch.no_grad():

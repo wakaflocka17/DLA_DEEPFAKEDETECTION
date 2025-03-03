@@ -5,53 +5,53 @@ import shutil
 
 def extract_dataset(dataset_dir):
     """
-    Legge tutti i file in dataset_dir e, in base al nome, li colloca
-    nelle cartelle corrispondenti:
-      - Train_part_*.zip      -> estrai in data/Train/Train
-      - Train_poly.json       -> sposta in data/Train
-      - Val_part_*.zip        -> estrai in data/Val/Val
-      - Val_poly.json         -> sposta in data/Val
-      - Test-Dev_part_*.zip   -> estrai in data/Test-Dev/Test-Dev
-      - Test-Dev_poly.json    -> sposta in data/Test-Dev
-      - Test-Challenge_part_*.zip  -> estrai in data/Test-Challenge/Test-Challenge
-      - Test-Challenge_poly.json   -> sposta in data/Test-Challenge
+    Reads all files in dataset_dir and, based on the filename, places them 
+    into the corresponding folders:
+      - Train_part_*.zip      -> extract into data/Train/Train
+      - Train_poly.json       -> move to data/Train
+      - Val_part_*.zip        -> extract into data/Val/Val
+      - Val_poly.json         -> move to data/Val
+      - Test-Dev_part_*.zip   -> extract into data/Test-Dev/Test-Dev
+      - Test-Dev_poly.json    -> move to data/Test-Dev
+      - Test-Challenge_part_*.zip  -> extract into data/Test-Challenge/Test-Challenge
+      - Test-Challenge_poly.json   -> move to data/Test-Challenge
     """
     
-    # Definiamo le cartelle di destinazione
+    # Define destination folders
     base_data_dir = "data"
     train_dir = os.path.join(base_data_dir, "Train")
     val_dir = os.path.join(base_data_dir, "Val")
     test_dev_dir = os.path.join(base_data_dir, "Test-Dev")
     test_challenge_dir = os.path.join(base_data_dir, "Test-Challenge")
 
-    # Creiamo le sottocartelle corrette
+    # Create the necessary subfolders
     os.makedirs(train_dir, exist_ok=True)
     os.makedirs(val_dir, exist_ok=True)
     os.makedirs(test_dev_dir, exist_ok=True)
     os.makedirs(test_challenge_dir, exist_ok=True)
 
-    # Scansiona tutti i file in dataset_dir
+    # Scan all files in dataset_dir
     for filename in os.listdir(dataset_dir):
         filepath = os.path.join(dataset_dir, filename)
 
         if os.path.isfile(filepath):
-            # Controlliamo prefisso e/o estensione
+            # Check prefix and/or extension
             if filename.startswith("Train_part_") and filename.endswith(".zip"):
-                # Esempio: "Train_part_1.zip"
-                extract_zip(filepath,train_dir)
+                # Example: "Train_part_1.zip"
+                extract_zip(filepath, train_dir)
             
             elif filename.startswith("Train_poly") and filename.endswith(".json"):
-                # Esempio: "Train_poly.json"
+                # Example: "Train_poly.json"
                 shutil.copy(filepath, train_dir)
 
             elif filename.startswith("Val") and filename.endswith(".zip"):
-                extract_zip(filepath,val_dir)
+                extract_zip(filepath, val_dir)
 
             elif filename.startswith("Val_poly") and filename.endswith(".json"):
                 shutil.copy(filepath, val_dir)
 
             elif filename.startswith("Test-Dev_part_") and filename.endswith(".zip"):
-                extract_zip(filepath,test_dev_dir)
+                extract_zip(filepath, test_dev_dir)
 
             elif filename.startswith("Test-Dev_poly") and filename.endswith(".json"):
                 shutil.copy(filepath, test_dev_dir)
@@ -67,7 +67,7 @@ def extract_dataset(dataset_dir):
 
 def extract_zip(zip_path, dest_dir):
     """
-    Estrae lo zip in dest_dir
+    Extracts the zip file into dest_dir
     """
     print(f"Extracting {os.path.basename(zip_path)} -> {dest_dir}")
     with zipfile.ZipFile(zip_path, 'r') as zf:

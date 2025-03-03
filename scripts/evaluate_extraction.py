@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import precision_score, recall_score, average_precision_score
 import seaborn as sns
 
-# Funzione per calcolare Intersection over Union (IoU)
+# Function to calculate Intersection over Union (IoU)
 def iou(boxA, boxB):
     """ Compute Intersection over Union (IoU) between two bounding boxes. """
     xA = max(boxA[0], boxB[0])
@@ -19,28 +19,28 @@ def iou(boxA, boxB):
     boxBArea = (boxB[2] - boxB[0]) * (boxB[3] - boxB[1])
 
     denominator = float(boxAArea + boxBArea - interArea)
-    if denominator == 0:  # Evita la divisione per zero
+    if denominator == 0:  # Avoid division by zero
         return 0.0
 
     return interArea / denominator
 
-# Funzione per calcolare Localization Recall Precision (LRP) Error
+# Function to calculate Localization Recall Precision (LRP) Error
 def compute_lrp(ground_truth, predictions):
     precision = precision_score(ground_truth, predictions)
     recall = recall_score(ground_truth, predictions)
     lrp_error = 1 - ((2 * precision * recall) / (precision + recall))
     return lrp_error
 
-# Funzione per calcolare Average Precision (AP)
+# Function to calculate Average Precision (AP)
 def compute_ap(ground_truth, scores):
     ap = average_precision_score(ground_truth, scores)
     return ap
 
-# Funzione per valutare l'estrazione dei volti (separata per "real" e "fake")
+# Function to evaluate face extraction (separately for "real" and "fake")
 def evaluate_face_extraction(json_path, extracted_faces_path):
     """ Compare extracted face bounding boxes with ground truth, considering 'real' and 'fake' separately. """
     
-    # Carica le bounding box originali dal JSON
+    # Load original bounding boxes from JSON
     with open(json_path, "r") as f:
         data = json.load(f)
 
@@ -54,24 +54,24 @@ def evaluate_face_extraction(json_path, extracted_faces_path):
 
         for annotation in data["annotations"]:
             if annotation["category_id"] != category_id:
-                continue  # Salta le annotazioni che non appartengono alla categoria corretta
+                continue  # Skip annotations that do not belong to the correct category
             
             bbox = annotation["bbox"]  # [x, y, width, height]
-            bbox_gt = [bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]]  # Converti in [x1, y1, x2, y2]
+            bbox_gt = [bbox[0], bbox[1], bbox[0] + bbox[2], bbox[1] + bbox[3]]  # Convert to [x1, y1, x2, y2]
 
-            # Simula una bounding box estratta (DEVE ESSERE SOSTITUITA CON LA TUA LOGICA!)
+            # Simulate an extracted bounding box (MUST BE REPLACED WITH YOUR LOGIC!)
             bbox_extracted = [bbox[0] + 5, bbox[1] + 5, bbox[0] + bbox[2] - 5, bbox[1] + bbox[3] - 5]
 
-            # Calcola IoU tra bounding box originale e quella estratta
+            # Compute IoU between ground truth and extracted bounding box
             iou_value = iou(bbox_gt, bbox_extracted)
             total_iou.append(iou_value)
 
-            # Se IoU > 0.5, consideriamo la bounding box come estratta correttamente
+            # If IoU > 0.5, consider the bounding box as correctly extracted
             ground_truth_labels.append(1)
             predicted_labels.append(1 if iou_value > 0.5 else 0)
-            prediction_scores.append(iou_value)  # Usiamo IoU come probabilità per AP
+            prediction_scores.append(iou_value)  # Use IoU as probability for AP
 
-        # Calcola le metriche
+        # Compute metrics
         mean_iou = np.mean(total_iou) if total_iou else 0
         lrp_error = compute_lrp(ground_truth_labels, predicted_labels) if ground_truth_labels else 1.0
         ap = compute_ap(ground_truth_labels, prediction_scores) if ground_truth_labels else 0
@@ -80,7 +80,7 @@ def evaluate_face_extraction(json_path, extracted_faces_path):
 
     return results
 
-# Dataset splits e relative cartelle
+# Dataset splits and corresponding folders
 splits = {
     "Train": ("data/Train/Train_poly.json", "processed_data/train_cropped"),
     "Val": ("data/Val/Val_poly.json", "processed_data/val_cropped"),
@@ -88,7 +88,7 @@ splits = {
     "Test-Challenge": ("data/Test-Challenge/Test-Challenge_poly.json", "processed_data/test_challenge_cropped")
 }
 
-# Calcola le metriche per ogni dataset e categoria (real/fake)
+# Compute metrics for each dataset and category (real/fake)
 all_results = []
 for split, (json_path, extracted_faces_path) in splits.items():
     print(f"🔍 Evaluating {split} dataset...")
@@ -96,12 +96,12 @@ for split, (json_path, extracted_faces_path) in splits.items():
     for category, mean_iou, lrp_error, ap in results:
         all_results.append([split, category, mean_iou, lrp_error, ap])
 
-# Creazione DataFrame per visualizzare i risultati
+# Create DataFrame to visualize results
 df_results = pd.DataFrame(all_results, columns=["Dataset", "Category", "Mean IoU", "LRP Error", "AP Score"])
 print("\n📊 Evaluation Results:\n")
 print(df_results)
 
-# Visualizza la tabella dei risultati con Seaborn
+# Display results table with Seaborn
 plt.figure(figsize=(10, 5))
 sns.heatmap(df_results.pivot(index="Dataset", columns="Category", values="Mean IoU"), 
             annot=True, fmt=".2f", cmap="coolwarm", linewidths=0.5)
