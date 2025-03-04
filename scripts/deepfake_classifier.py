@@ -5,7 +5,6 @@ import torchvision.models as models
 import timm
 from cnn_custom import CustomCNN
 
-# Aggiungi questa riga all'inizio del file, prima di qualsiasi altra operazione di rete
 ssl._create_default_https_context = ssl._create_unverified_context
 
 def get_model(model_name="mobilenet", num_classes=2):
@@ -36,4 +35,5 @@ if __name__ == "__main__":
     # Test the model loading
     model_mobilenet = get_model("mobilenet")
     model_xception = get_model("xception")
+    model_xception = get_model("custom")
     print("Models loaded successfully!")
