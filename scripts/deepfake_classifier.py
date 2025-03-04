@@ -22,16 +22,13 @@ def get_model(model_name="mobilenet", num_classes=2):
         model.classifier[1] = nn.Linear(in_features, num_classes)
 
     elif model_name == "xception":
-        # Utilizziamo timm per il modello Xception
         model = timm.create_model('xception', pretrained=True)
-        # Modifica l'ultimo layer per la classificazione binaria
+        #Last layer is modified for binary classification
         model.fc = nn.Linear(model.fc.in_features, num_classes)
 
-    elif model_name == "custom":
-        print("Selezionato modello custom")
-        model = CustomCNN(num_classes=num_classes)
+    elif model_name == "custom":        model = CustomCNN(num_classes=num_classes)
     else:
-        raise ValueError("Invalid model name. Choose 'mobilenet' or 'xception'.")
+        raise ValueError("Invalid model name. Choose 'mobilenet', 'xception' or 'custom'.")
 
     return model
 
