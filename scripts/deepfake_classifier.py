@@ -26,6 +26,8 @@ def get_model(model_name="mobilenet", num_classes=2):
         # Modifica l'ultimo layer per la classificazione binaria
         model.fc = nn.Linear(model.fc.in_features, num_classes)
 
+    elif model_name == "custom":
+        print("Selezionato modello custom")
     else:
         raise ValueError("Invalid model name. Choose 'mobilenet' or 'xception'.")
 
