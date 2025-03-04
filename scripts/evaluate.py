@@ -57,7 +57,8 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(description="Evaluate deepfake detection model")
-    parser.add_argument("--model", type=str, choices=["mobilenet", "xception"], required=True, help="Choose model: 'mobilenet' or 'xception'")
+    parser.add_argument("--model", type=str, choices=["mobilenet", "xception", "custom"], required=True,
+                    help="Scegli il modello: 'mobilenet', 'xception' o 'custom'")
     parser.add_argument("--dataset", type=str, choices=["test_dev_cropped", "test_challenge"], required=True, help="Dataset: 'Test-Dev' or 'Test-Challenge'")
     args = parser.parse_args()
 

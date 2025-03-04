@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn  # Aggiungi questa riga
 import torchvision.models as models
 import timm
+from cnn_custom import CustomCNN
 
 # Aggiungi questa riga all'inizio del file, prima di qualsiasi altra operazione di rete
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -28,7 +29,7 @@ def get_model(model_name="mobilenet", num_classes=2):
 
     elif model_name == "custom":
         print("Selezionato modello custom")
-        model = CustomCNN()
+        model = CustomCNN(num_classes=num_classes)
     else:
         raise ValueError("Invalid model name. Choose 'mobilenet' or 'xception'.")
 
