@@ -28,6 +28,7 @@ def get_model(model_name="mobilenet", num_classes=2):
 
     elif model_name == "custom":
         print("Selezionato modello custom")
+        model = CustomCNN()
     else:
         raise ValueError("Invalid model name. Choose 'mobilenet' or 'xception'.")
 
