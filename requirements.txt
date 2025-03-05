@@ -27,3 +27,6 @@ timm==0.9.10
 pandas==2.1.4
 seaborn==0.13.0
 matplotlib==3.8.2
+
+# Grad-CAM
+grad-cam
