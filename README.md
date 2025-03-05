@@ -156,26 +156,6 @@ python3 scripts/dataloader.py --dataset Train --batch_size 32
 ```
 💡 This should display a batch of `images` and `labels`.
 
-## 🔲 Evaluate Bounding Boxes
-To evaluate the correct extraction of faces by comparing the extracted faces with the bounding boxes provided by the `.json` files within the file, run the following command:
-```python
-python3 scripts/evaluate_extraction.py 
-```
-💡 This will:
-| **Metric**       | **Threshold**        | **Interpretation** |
-|------------------|---------------------|--------------------|
-| **Intersection over Union (IoU)** | **IoU** > 0.7 | ✅ **Accurate extraction** |
-|                      | 0.5 ≤ **IoU** ≤ 0.7 | ⚠️ **Moderate accuracy, possible misalignment** |
-|                      | **IoU** < 0.5 | ❌ **Poor extraction, bounding boxes misaligned** |
-| **Localization Recall Precision (LRP) Error** | **LRP Error** < 0.2 | ✅ **High localization accuracy** |
-|                      | 0.2 ≤ **LRP Error** ≤ 0.4 | ⚠️ **Moderate localization errors** |
-|                      | **LRP Error** > 0.4 | ❌ **Poor localization, high false positives/negatives** |
-| **Average Precision (AP)** | **AP** > 0.8 | ✅ **Highly precise face extraction** |
-|                      | 0.5 ≤ **AP** ≤ 0.8 | ⚠️ **Moderate accuracy, potential misclassifications** |
-|                      | **AP** < 0.5 | ❌ **Unreliable extraction, high error rate** |
-
-This analysis ensures that the face extraction process is aligned with OpenForensics benchmarks before training the model.
-
 ## 🎯 Train the Model
 Train the model using either `MobileNet` or `Xception`: <br> <br>
 ✅ Train with `MobileNet`:
