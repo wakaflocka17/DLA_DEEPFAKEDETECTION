@@ -186,6 +186,10 @@ python3 scripts/train.py --model mobilenet
 ```python
 python3 scripts/train.py --model xception
 ```
+✅ Train with `Custom network`:
+```python
+python3 scripts/train.py --model custom
+```
 💡 The trained model will be saved in the `models/` directory.
 
 ## 📊 Evaluate the Model
@@ -205,6 +209,10 @@ python3 scripts/evaluate.py --model xception --dataset Test-Dev
 ✅ Evaluate **Xception** on `Test-Challenge`:
 ```python
 python3 scripts/evaluate.py --model xception --dataset Test-Challenge
+```
+✅ Evaluate **Custom network** on `Test-Dev`:
+```python
+python3 scripts/evaluate.py --model custom --dataset Test-Dev
 ```
 ✅ Evaluate **Custom network** on `Test-Challenge`:
 ```python
