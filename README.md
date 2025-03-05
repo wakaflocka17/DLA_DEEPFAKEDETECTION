@@ -206,6 +206,10 @@ python3 scripts/evaluate.py --model xception --dataset Test-Dev
 ```python
 python3 scripts/evaluate.py --model xception --dataset Test-Challenge
 ```
+✅ Evaluate **Custom network** on `Test-Challenge`:
+```python
+python3 scripts/evaluate.py --model custom --dataset Test-Challenge
+```
 💡 The script will print **Accuracy**, **Precision**, **Recall**, and **F1-score**.
 
 ---
