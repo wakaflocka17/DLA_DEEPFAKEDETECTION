@@ -9,8 +9,9 @@ The following image shows the difference between
 - Standard convolutional layer with batch norm and ReLU on the left.
 - Depth wise Separable convolutions with Depthwise
  and Pointwise layers followed by batch norm and ReLU.
-
-![alt text](images/image-1.png)
+<div align="center">
+  <img src="images/image-1.png" alt="Mobilenet architecture">
+</div>
 
 MobileNet distinguishes itself with its remarkable flexibility. It introduces two global hyperparameters—the width multiplier and the resolution multiplier—which allow developers to fine-tune the trade-off between accuracy, latency, and model size. This adaptability enables the network to be scaled down for resource-constrained environments while still maintaining competitive performance on tasks like image classification, object detection, and beyond.
 
