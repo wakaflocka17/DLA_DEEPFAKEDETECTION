@@ -5,26 +5,21 @@
 </div>
 
 ---
-## 📑 Summary
-
-<p>
-  <a href="#students">0️⃣1️⃣ - 🧑🏻‍🎓 <strong>Students</strong></a><br>
-  <a href="#description">0️⃣2️⃣ - 📌 <strong>Description</strong></a><br>
-  <a href="#dataset">0️⃣3️⃣ - 📥 <strong>Download the Dataset</strong></a><br>
-  <a href="#documentation">0️⃣4️⃣ - 📄 <strong>Documentation</strong></a><br>
-  <a href="#installation">0️⃣5️⃣ - 🚀 <strong>Installation</strong></a><br>
-  <a href="#test_dataloader">0️⃣6️⃣ - 🛠️ <strong>Test the DataLoader</strong></a><br>
-  <a href="#train_model">0️⃣7️⃣ - 🎯 <strong>Train the Model</strong></a><br>
-  <a href="#evaluate_model">0️⃣8️⃣ - 📊 <strong>Evaluate the Model</strong></a><br>
-  <a href="#project_structure">0️⃣9️⃣ - 📂 <strong>Project Structure</strong></a><br>
-  <a href="#project_goals">1️⃣0️⃣ - 📊 <strong>Project Goals</strong></a><br>
-  <a href="#contributions">1️⃣1️⃣ - 🤝 <strong>Contributions</strong></a>
-</p>
-
+> ## 📑 Summary
+> 0. [🧑🏻‍🎓 **Students**](#-students)
+> 1. [📌 **Description**](#-description)
+> 2. [📥 **Download the Dataset**](#-download-the-dataset)
+> 3. [📄 **Documentation**](#-documentation)
+> 4. [🚀 **Installation**](#-installation)
+> 5. [🛠️ **Test the DataLoader**](#-test-the-dataloader)
+> 6. [🎯 **Train the Model**](#-train-the-model)
+> 7. [📊 **Evaluate the Model**](#-evaluate-the-model)
+> 8. [📂 **Project Structure**](#-project-structure)
+> 9. [📊 **Project Goals**](#-project-goals)
+> 10. [🤝 **Contributions**](#-contributions)
 
 ---
- 
-<a id="students"></a>
+
 ## 🧑🏻‍🎓 Students  
 #### Francesco Congiu  
 > Student ID: 60/73/65300  
@@ -43,7 +38,6 @@
 
 ---
 
-<a id="description"></a>
 ## 📌 Description  
 This repository contains the code for training and evaluating deepfake detection models using the **OpenForensics** dataset. The project follows two approaches:  
 1. **Transfer Learning** with pre-trained models (e.g., MobileNet, Xception).  
@@ -51,14 +45,12 @@ This repository contains the code for training and evaluating deepfake detection
 
 ---
 
-<a id="dataset"></a>
 ## 📥 Download the Dataset  
 The **OpenForensics** dataset required for the project can be downloaded from the following link:  
 🔗 **[OpenForensics Dataset - Zenodo](https://zenodo.org/records/5528418)**  
 
 ---
 
-<a id="documentation"></a>
 ## 📄 **Documentation**  
 Below are links to the full project documentation:
 - 📚 [Theoretical Background](documentation/BACKGROUND.md)
@@ -71,7 +63,6 @@ Below are links to the full project documentation:
 
 ---
 
-<a id="installation"></a>
 ## 🚀 Installation  
 To run the project locally, follow these steps:
 
@@ -172,7 +163,6 @@ If no errors appear, the setup is complete! 🎯
 
 ---
 
-<a id="test_dataloader"></a>
 ## 🛠️ Test the DataLoader
 Before training, verify that the dataset is correctly loaded:
 ```python
@@ -180,7 +170,6 @@ python3 scripts/dataloader.py --dataset Train --batch_size 32
 ```
 💡 This should display a batch of `images` and `labels`.
 
-<a id="train_model"></a>
 ## 🎯 Train the Model
 Train the model using either `MobileNet` or `Xception`: <br> <br>
 ✅ Train with `MobileNet`:
@@ -197,7 +186,6 @@ python3 scripts/train.py --model custom
 ```
 💡 The trained model will be saved in the `models/` directory.
 
-<a id="evaluate_model"></a>
 ## 📊 Evaluate the Model
 After training, evaluate the model on `Test-Dev` and `Test-Challenge`: <br> <br>
 ✅ Evaluate **MobileNet** on `Test-Dev`:
@@ -228,7 +216,6 @@ python3 scripts/evaluate.py --model custom --dataset Test-Challenge
 
 ---
 
-<a id="project_structure"></a>
 ## 📂 Project Structure  
 ```plaintext
 DLA_DEEPFAKEDETECTION/
@@ -262,17 +249,15 @@ DLA_DEEPFAKEDETECTION/
 │── setup_folders.sh    # Script for automatic creation of folders
 │── README.md           # Project documentation
 ```
-<a id="project_goals"></a>
+
 ## 📊 Project Goals
 ✅ **Face extraction** from images using bounding boxes.  
 ✅ **Binary classification (fake/real)** of extracted faces.  
 ✅ **Training with transfer learning** using MobileNet or Xception.  
-✅ **Development of a custom CNN** for classification.  
-✅ **GPU utilization (MPS on MacBook M4 Pro)** to maximize speed  
+✅ **Development of a custom CNN** for classification.
 
 ---
 
-<a id="contributions"></a>
 ## 🤝 Contributions  
 Feel free to contribute to the project! 💡
 
