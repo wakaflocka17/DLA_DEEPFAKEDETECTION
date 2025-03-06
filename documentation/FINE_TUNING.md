@@ -22,12 +22,11 @@ Xception [Xception: Deep Learning with Depthwise Separable Convolutions Franc¸o
 A convolution layer attempts to learn filters in a 3D space, with 2 spatial dimensions (width and height) and a channel dimension; thus a single convolution kernel is tasked with simultaneously mapping cross-channel correlations and spatial correlations. This idea behind the Inception module is to make this process easier and more efficient by explicitly factoring it into a series of operations that would independently look at cross-channel correlations and at spatial correlations. The typical Inception module first looks at cross channel correlations via a set of 1x1 convolutions, mapping  the input data into 3 or 4 separate spaces that are smaller than the original input space, and then maps all correlations in these smaller 3D spaces, via regular 3x3 or 5x5 convolutions.
 
 <div align="center">
-  <img src="images/canonicalInception.png" alt="canonical inception module" caption="A canonical Inception module (Inception V3).">
+  <img src="images/image.png" alt="canonical inception module" caption="A canonical Inception module (Inception V3).">
 </div>
 
 <div align="center">
-  <img src="images/extremeVersion/.png" alt="extreme version of inception module" caption ="An “extreme” version of our Inception module, with one spatial convolution per output channel of the 1x1 convolution.">
+  <img src="images/Screenshot 2025-03-06 162939.png" alt="extreme version of inception module" caption ="An “extreme” version of our Inception module, with one spatial convolution per output channel of the 1x1 convolution.">
 </div>
 
 An in depth view of how the Xception model can be used is seen in the paper done by R. Helaly et al. [https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9329302&isnumber=9329288]
-![alt text](images/image.png)
