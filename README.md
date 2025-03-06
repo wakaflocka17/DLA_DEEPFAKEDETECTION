@@ -6,17 +6,18 @@
 
 ---
 > ## 📑 Summary
-> 0. [🧑🏻‍🎓 Students](#-students)
-> 1. [📌 Description](#-description)
-> 2. [📥 Download the Dataset](#-download-the-dataset)
-> 3. [📄 Documentation](#-documentation)
-> 4. [🚀 Installation](#-installation)
-> 5. [🛠️ Test the DataLoader](#-test-the-dataloader)
-> 6. [🎯 Train the Model](#-train-the-model)
-> 7. [📊 Evaluate the Model](#-evaluate-the-model)
-> 8. [📂 Project Structure](#-project-structure)
-> 9. [📊 Project Goals](#-project-goals)
-> 10. [🤝 Contributions](#-contributions)
+> 1. [🧑🏻‍🎓 Students](#-students)
+> 2. [📌 Description](#-description)
+> 3. [📥 Download the Dataset](#-download-the-dataset)
+> 4. [📄 Documentation](#-documentation)
+> 5. [🚀 Installation](#-installation)
+> 6. [🛠️ Test the DataLoader](#test-the-dataloader)
+> 7. [🎯 Train the Model](#-train-the-model)
+> 8. [📊 Evaluate the Model](#-evaluate-the-model)
+> 9. [📂 Project Structure](#-project-structure)
+> 10. [📊 Project Goals](#-project-goals)
+> 11. [🤝 Contributions](#-contributions)
+> 12. [🖥️ Hardware and Limitations](#hardware-and-limitations)
 
 ---
 
@@ -163,7 +164,7 @@ If no errors appear, the setup is complete! 🎯
 
 ---
 
-## 🛠️ Test the DataLoader
+## 🛠️ Test the DataLoader <a name="test-the-dataloader"></a>
 Before training, verify that the dataset is correctly loaded:
 ```python
 python3 scripts/dataloader.py --dataset Train --batch_size 32
@@ -255,6 +256,15 @@ DLA_DEEPFAKEDETECTION/
 ✅ **Binary classification (fake/real)** of extracted faces.  
 ✅ **Training with transfer learning** using MobileNet or Xception.  
 ✅ **Development of a custom CNN** for classification.
+
+## 🖥️ Hardware and Limitations <a name="hardware-and-limitations"></a>
+The experiments were performed on a MacBook Pro (2024) with the following specifications:
+> - **Operating system**: macOS Sonoma
+> - **Processor**: Apple M4 Pro
+> - **GPU**: Apple integrated GPU (M4 Pro)
+> - **RAM**: 16 GB (unified memory)
+Due to the size and computational complexity of the dataset, it is possible that some experiments may be slower or
+difficult to execute on systems with fewer resources or less performing hardware.
 
 ---
 
