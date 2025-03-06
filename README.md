@@ -6,17 +6,17 @@
 
 ---
 > ## 📑 Summary
-> 0. [🧑🏻‍🎓 **Students**](#-students)
-> 1. [📌 **Description**](#-description)
-> 2. [📥 **Download the Dataset**](#-download-the-dataset)
-> 3. [📄 **Documentation**](#-documentation)
-> 4. [🚀 **Installation**](#-installation)
-> 5. [🛠️ **Test the DataLoader**](#-test-the-dataloader)
-> 6. [🎯 **Train the Model**](#-train-the-model)
-> 7. [📊 **Evaluate the Model**](#-evaluate-the-model)
-> 8. [📂 **Project Structure**](#-project-structure)
-> 9. [📊 **Project Goals**](#-project-goals)
-> 10. [🤝 **Contributions**](#-contributions)
+> 0. [🧑🏻‍🎓 Students](#-students)
+> 1. [📌 Description](#-description)
+> 2. [📥 Download the Dataset](#-download-the-dataset)
+> 3. [📄 Documentation](#-documentation)
+> 4. [🚀 Installation](#-installation)
+> 5. [🛠️ Test the DataLoader](#-test-the-dataloader)
+> 6. [🎯 Train the Model](#-train-the-model)
+> 7. [📊 Evaluate the Model](#-evaluate-the-model)
+> 8. [📂 Project Structure](#-project-structure)
+> 9. [📊 Project Goals](#-project-goals)
+> 10. [🤝 Contributions](#-contributions)
 
 ---
 
