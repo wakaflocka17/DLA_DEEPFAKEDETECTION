@@ -34,7 +34,7 @@
 
 #### Fabio Littera  
 > Student ID: 60/73/65310  
->  
+> 
 >> E-Mail: f.littera3@studenti.unica.it  
 
 ---
@@ -58,7 +58,7 @@ Below are links to the full project documentation:
 - 🛠 [Feature Extraction](documentation/FEATURE_EXTRACTION.md)
 - 📊 [Metadata Analysis](documentation/METADATA_ANALYSIS.md)
 - 🎯 [Fine Tuning of MobileNet and xCeption](documentation/FINE_TUNING.md)
-- 🏗 [Building a Network from the Ground Up](documentation/CUSTOM_NETWORK.md)
+- 🏗 [Building a Network from scratch](documentation/CUSTOM_NETWORK.md)
 
 📂 **[Cartella con tutta la documentazione](documentation/)**
 
