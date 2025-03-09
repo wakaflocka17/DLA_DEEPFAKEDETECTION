@@ -1,4 +1,4 @@
-# 1. METADATA ANALYSIS
+# 📚 1. THEORETHICAL BACKGROUND
 ## 1.1 Pre-trained network architectures: MobileNet e Xception
 This section provides an overview of two custom neural networks, MobileNet and Xception, with specific attention regarding their architectures and underlying principles. Both architectures uses the concept of depthwise separable convolutions to obtain an optimal balance between computational efficiency and accuracy, although they were designed for different purposes and applications.
 
