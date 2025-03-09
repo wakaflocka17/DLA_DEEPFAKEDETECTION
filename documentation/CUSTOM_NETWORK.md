@@ -1,4 +1,4 @@
-# 5. BUILDING A NETWORK FROM SCRATCH
+# 🏗 5. BUILDING A NETWORK FROM SCRATCH
 ## General description
 In this section, we illustrate the structure and motivation behind the custom CNN developed for detecting DeepFake images via binary classification, distinguishing between real and fake images.
 
