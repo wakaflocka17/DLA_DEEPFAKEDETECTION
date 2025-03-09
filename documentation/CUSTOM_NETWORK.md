@@ -159,6 +159,7 @@ The results obtained on **Test-Challenge** are as follows:
 | F1-score    | 0.9758  |
 
 We also implemented a Grad-CAM visualization to better understand the model's decision-making process, as shown below.
+
 **Fake Image**:
 
 ![fake_gradcam_side_by_side](https://github.com/user-attachments/assets/128f4ee4-3a7a-4e8c-bebe-1d8d56c3a10a)
