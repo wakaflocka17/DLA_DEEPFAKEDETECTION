@@ -6,7 +6,13 @@
 ---
 
 ## 3.1 Descrizione Generale del Dataset
-Il dataset OpenForensics rappresenta una delle più grandi raccolte di immagini reali e manipulate, specificamente progettata per affrontare le sfide della rilevazione e segmentazione di deepfake multi-faccia in ambienti reali ("in-the-wild"). Il suo obiettivo è quello di superare le limitazioni dei dataset esistenti, che spesso contengono immagini a sfondo uniforme, con una singola faccia e scenari poco rappresentativi della complessità reale.
+Il dataset **OpenForensics** rappresenta una delle più grandi raccolte di immagini reali e manipulate, specificamente progettata per compiti di rilevazione e segmentazione di deepfake multi-faccia in ambienti reali (o _In-The-Wild_). Il suo obiettivo è quello di superare le limitazioni dei dataset esistenti, che spesso contengono immagini a _sfondo uniforme_, con una _singola faccia_ e _scenari poco rappresentativi_ della complessità reale.
+
+
+Questo dataset segue la tipologia di formato **COCO** (o _Common Objects in Context_), che altro non è che uno standard ampiamente adottato nella branca della Computer Vision per organizzare e annotare dati destinati a compiti come il rilevamento oggetti, la segmentazione e il riconoscimento di punti chiave (o keypoints). Infatti, nel nostro caso specifico, il dataset in analisi è organizzato come segue:
+<div align="center">
+  <img src="../utils/images/openforensics_schema.png" alt="Metadata examples">
+</div>
 
 ---
 
@@ -31,7 +37,7 @@ Per replicare le condizioni reali, il dataset include un sottoinsieme denominato
 Il file JSON per ogni split del dataset è strutturato come segue:
 ### 3.3.1 Categories
 > [!NOTE]
-> 💡 La sezione `categories` contiene le categorie delle classi (ad es. "Real" e "Fake") con un identificativo.
+> 💡 La sezione `categories` contiene le categorie delle classi (ad es. `Real` e `Fake`) con un identificativo.
 >```json
 >    "categories": [
 >        {
@@ -187,7 +193,7 @@ os.makedirs(fake_dir, exist_ok=True)
 ```
 
 ### 3.4.2 Lettura del file *_poly.json
-Viene caricato il file JSON (ad esempio, Train_poly.json, Val_poly.json, etc.) che segue la struttura **COCO**. Da questo file viene creata una mappa che associa ogni image_id al corrispondente file_name.
+Viene caricato il file JSON (ad esempio, `Train_poly.json`, `Val_poly.json`, etc.) che segue la struttura **COCO** (già descritta in precedenza). Da questo file viene creata una mappa che associa ogni image_id al corrispondente file_name.
 ```python
 with open(json_path, 'r') as f:
     data = json.load(f)
@@ -197,7 +203,7 @@ images_info = {img["id"]: img["file_name"] for img in data["images"]}
 ```
 
 ### 3.4.3 Elaborazione delle annotazioni
-Per ogni annotazione, lo script estrae il bounding box, specificato come `[x, y, w, h]`, e calcola le coordinate del rettangolo da utilizzare per il ritaglio. È importante notare che le coordinate dei bounding box, utilizzate per l'estrazione dei volti, sono state fornite direttamente dagli autori del dataset tramite i file .poly (precedentemente descritti). Queste annotazioni garantiscono una rappresentazione accurata delle regioni contenenti i volti, facilitando l'estrazione corretta dei volti manipolati e reali.
+Per ogni annotazione, lo script estrae il bounding box, specificato come `[x, y, w, h]`, e calcola le coordinate del rettangolo da utilizzare per il ritaglio. È importante notare che le coordinate dei bounding box, utilizzate per l'estrazione dei volti, sono state fornite direttamente dagli autori del dataset tramite i file `*_.poly` (precedentemente descritti). Queste annotazioni garantiscono una rappresentazione accurata delle regioni contenenti i volti, facilitando l'estrazione corretta dei volti manipolati e reali.
 ```python
 for ann in data["annotations"]:
     image_id = ann["image_id"]
@@ -210,7 +216,7 @@ for ann in data["annotations"]:
 ```
 
 ### 3.4.4 Estrazione e salvataggio del volto
-L'immagine viene letta con OpenCV, e tramite le coordinate del bounding box si estrae il volto. In base alla categoria (0 per `Real`, 1 per `Fake`), il volto viene salvato nella cartella appropriata con un nome file che include un indice progressivo per evitare conflitti.
+L'immagine viene letta con **OpenCV**, e tramite le **coordinate del bounding box** si estrae il volto. In base alla categoria (0 per `Real`, 1 per `Fake`), il volto viene salvato nella cartella appropriata con un nome file che include un indice progressivo per evitare conflitti.
 ```python
 # Verifica se l'immagine esiste e leggila
 if image_id in images_info:
