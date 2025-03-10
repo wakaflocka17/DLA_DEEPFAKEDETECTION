@@ -258,12 +258,15 @@ DLA_DEEPFAKEDETECTION/
 ✅ **Development of a custom CNN** for classification.
 
 ## 🖥️ Hardware and Limitations <a name="hardware-and-limitations"></a>
-The experiments were performed on a MacBook Pro (2024) with the following specifications:
-> - **Operating system**: macOS Sonoma
-> - **Processor**: Apple M4 Pro
-> - **GPU**: Apple integrated GPU (M4 Pro)
-> - **RAM**: 32 GB (unified memory)
-Due to the size and computational complexity of the dataset, it is possible that some experiments may be slower or
+> [!NOTE]
+> The experiments were performed on a MacBook Pro (2024) with the following specifications:
+> - **Operating system**: macOS Sonoma;
+> - **Processor**: Apple M4 Pro;
+> - **GPU**: Apple integrated GPU (M4 Pro);
+> - **RAM**: 32 GB (unified memory);
+
+> [!WARNING]
+> Due to the size and computational complexity of the dataset, it is possible that some experiments may be slower or
 difficult to execute on systems with fewer resources or less performing hardware.
 
 ---
@@ -275,15 +278,15 @@ Feel free to contribute to the project! 💡
 1. Fork the repository.
 2. Create a new branch:
    ```bash
-   git checkout -b feature-nuova
+   git checkout -b new-feature
    ```
 3. Commit your changes:
    ```bash
-     git commit -m "Aggiunta nuova feature"
+     git commit -m "Add new feature"
    ```
 4. Push your changes:
    ```bash
-     git push origin feature-nuova
+     git push origin new-feature
    ```
 6. Open a Pull Request on GitHub.
 
