@@ -1,6 +1,6 @@
 # 🕵🏻‍♂️ DLA DEEPFAKE DETECTION 2024/25 - UNICA
 <div align="center">
-  <img src="utils/images/deepfakes-large.png" alt="Deepfake examples">
+  <img src="utils/images/augmentations.jpg" alt="Deepfake examples">
   <p> Deepfake Detection Project using the OpenForensics dataset </p>
 </div>
 
