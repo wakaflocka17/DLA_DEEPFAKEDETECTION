@@ -157,6 +157,9 @@ Furthermore, having a large number of training images allows us to effectively u
 ---
 
 ## 6. Evaluation Results
+
+The fine-tuning of **Xception**, with our HyperParameters and a M4 Pro Macbook, took 5 hours and 30 minutes. Instead the fine-tuning of **MobileNet-v2**, with the same enviroment, took 1 hour and 40 minutes in total.
+
 ### Results on Test-Dev
 
 | Model          | Accuracy | Precision | Recall | F1-Score |
