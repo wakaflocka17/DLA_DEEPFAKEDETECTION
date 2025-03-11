@@ -16,8 +16,8 @@
 > 8. [📊 Evaluate the Model](#-evaluate-the-model)
 > 9. [📂 Project Structure](#-project-structure)
 > 10. [📊 Project Goals](#-project-goals)
-> 11. [🤝 Contributions](#-contributions)
-> 12. [🖥️ Hardware and Limitations](#hardware-and-limitations)
+> 11. [🖥️ Hardware and Limitations](#hardware-and-limitations)
+> 12. [🤝 Contributions](#-contributions)
 
 ---
 
