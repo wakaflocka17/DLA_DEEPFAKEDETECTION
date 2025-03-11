@@ -1,6 +1,78 @@
 # 🏗 5. BUILDING A NETWORK FROM SCRATCH
 ## General description
 In this section, we illustrate the structure and motivation behind the custom CNN developed for detecting DeepFake images via binary classification, distinguishing between real and fake images.
+
+<table style="margin: auto; text-align: center;">
+  <caption style="text-align: center;">
+    <strong>Table 5.1. Architectures for our Custom CNN</strong>
+  </caption>
+  <thead>
+    <tr>
+      <th>Layer</th>
+      <th>Input Shape</th>
+      <th>Operazione</th>
+      <th>Output Shape</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>First Convolutional Block</td>
+      <td>(3, 224, 224)</td>
+      <td>
+        Conv2d(in=3, out=32, kernel=3, pad=1)<br>
+        BatchNorm2d(32)<br>
+        ReLU<br>
+        MaxPool2d(kernel=2, stride=2)
+      </td>
+      <td>(32, 112, 112)</td>
+    </tr>
+    <tr>
+      <td>Second Convolutional Block</td>
+      <td>(32, 112, 112)</td>
+      <td>
+        Conv2d(in=32, out=64, kernel=3, pad=1)<br>
+        BatchNorm2d(64)<br>
+        ReLU<br>
+        MaxPool2d(kernel=2, stride=2)
+      </td>
+      <td>(64, 56, 56)</td>
+    </tr>
+    <tr>
+      <td>Third Convolutional Block</td>
+      <td>(64, 56, 56)</td>
+      <td>
+        Conv2d(in=64, out=128, kernel=3, pad=1)<br>
+        BatchNorm2d(128)<br>
+        ReLU<br>
+        MaxPool2d(kernel=2, stride=2)
+      </td>
+      <td>(128, 28, 28)</td>
+    </tr>
+    <tr>
+      <td>Flatten</td>
+      <td>(128, 28, 28)</td>
+      <td>Flatten</td>
+      <td>(1, 100352)</td>
+    </tr>
+    <tr>
+      <td>Fully Connected (FC1 + ReLU + Dropout)</td>
+      <td>(1, 100352)</td>
+      <td>
+        Linear(100352 &rarr; 512)<br>
+        ReLU<br>
+        Dropout(p=0.5)
+      </td>
+      <td>(1, 512)</td>
+    </tr>
+    <tr>
+      <td>Output (FC2)</td>
+      <td>(1, 512)</td>
+      <td>Linear(512 &rarr; 2)</td>
+      <td>(1, 2)</td>
+    </tr>
+  </tbody>
+</table>
+
 ![Risorsa 2-100](https://github.com/user-attachments/assets/5f3e7dbb-bac5-441c-9077-91324eef77dd)
 
 ## Network architecture
