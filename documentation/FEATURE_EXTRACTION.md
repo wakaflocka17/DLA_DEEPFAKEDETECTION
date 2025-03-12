@@ -10,7 +10,7 @@ Una volta estratto il volto, vengono calcolati **68 punti di riferimento** (o _l
   <p> Deepfake Detection Project using the OpenForensics dataset </p>
 </div>
 
-## 2.1.1 Metodologia di estrazione dei volti
+### 2.1.1 Metodologia di estrazione dei volti
 Per estrarre i volti (sia reali che manipolati) dal dataset OpenForensics, abbiamo adottato un approccio basato sul formato COCO per le annotazioni. In particolare, lo script si occupa di creare le cartelle di output, leggere i vari file `*_poly.json`, elaborare le annotazioni, estrarre i volti e salvarli successivamente.
 
 ### 2.1.2 Creazione delle cartelle di output
