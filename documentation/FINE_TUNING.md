@@ -1,6 +1,6 @@
 # 🎯 4. FINE TUNING OF MOBILENET AND XCEPTION
 
-## 5.1 General Description of Fine-Tuning
+## 4.1 General Description of Fine-Tuning
 **Fine-tuning** is a transfer learning technique used to adapt a pre-trained neural network — originally trained on large generic datasets — to a specific, specialized task. 
 Instead of training a model from scratch, we adjust the weights for our DeepFake Detection task.
 
@@ -8,7 +8,7 @@ By using this approach we reduce training time and the net guarentees better per
 
 ---
 
-## 5.2 Models Chosen for Fine-Tuning
+## 4.2 Models Chosen for Fine-Tuning
 
 We selected two state-of-the-art pre-trained CNN models for fine-tuning:
 
@@ -19,10 +19,10 @@ Both models are used for extracting high-level visual features, which we then ad
 
 ---
 
-## 5.3 Fine-Tuning Implementation Details
+## 4.3 Fine-Tuning Implementation Details
 Here we describe the precise process of fine-tuning performed for each model.
 
-### 5.3.1 MobileNet-v2
+### 4.3.1 MobileNet-v2
 
 For MobileNet-v2, we replace the original classification layer to adapt the network to our binary classification task.
 
@@ -35,7 +35,7 @@ model.classifier[1] = nn.Linear(in_features, 2)
 - The original fully connected layer (`model.classifier[1]`) is replaced by a new linear layer designed specifically for our two-class classification.
 - This allows the model to specialize in DeepFake-specific characteristics and give us a binary output.
 
-### 5.3.2 Xception
+### 4.3.2 Xception
 
 Similarly, for the Xception model, we apply the following modifications:
 
@@ -49,11 +49,11 @@ model.fc = nn.Linear(model.fc.in_features, 2)
 
 ---
 
-## 5.4 Training Procedure
+## 4.4 Training Procedure
 
 After modifying the final layers, the fine-tuning training process includes the following steps:
 
-### 1. **Data Preparation**
+### 4.4.1 **Data Preparation**
 
 We create DataLoaders for training and validation datasets:
 
@@ -62,7 +62,7 @@ train_loader = create_dataloader("processed_data/train_cropped", batch_size=32, 
 val_loader   = create_dataloader("processed_data/val_cropped", batch_size=32, shuffle=False)
 ```
 
-### 2. **Hyperparameters Definition**
+### 4.4.2 **Hyperparameters Definition**
 
 The following hyperparameters are set for optimal performance:
 
@@ -75,7 +75,7 @@ optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "mps" if torch.backends.mps.is_available() else "cpu")
 ```
 
-### 2. **Fine-Tuning Training Loop**
+### 4.4.3 **Fine-Tuning Training Loop**
 
 The training loop includes standard PyTorch procedures:
 
@@ -123,7 +123,7 @@ for epoch in range(EPOCHS):
     val_accuracy = correct / total
 ```
 
-### 2. **What happens during training specifically?**
+### 4.4.4 **What happens during training specifically?**
 
 - **Forward pass**: Input images pass through pre-trained convolutional layers to extract general and specific features. The new fully connected layers transform these features into predictions.
 - **Loss Calculation**: Predictions (`outputs`) are compared to ground-truth labels (`labels`) using Cross-Entropy Loss.
@@ -131,7 +131,7 @@ for epoch in range(EPOCHS):
 
 ---
 
-## 5.5 Saving the Fine-Tuned Models
+## 4.5 Saving the Fine-Tuned Models
 
 After training, the models are saved for future inference and evaluation:
 
@@ -144,7 +144,7 @@ This ensures the trained parameters are stored and reusable.
 
 ---
 
-## 5.5 Benefits and Motivations of Our Approach
+## 4.6 Benefits and Motivations of Our Approach
 
 We adopted a **complete fine-tuning** strategy for our pre-trained models (**MobileNet-v2** and **Xception**) because it proves to be the most effective approach for our specific task of **DeepFake detection**. 
 
@@ -156,11 +156,11 @@ Furthermore, having a large number of training images allows us to effectively u
 
 ---
 
-## 6. Evaluation Results
+## 4.7 Evaluation Results
 
 The fine-tuning of **Xception**, with our HyperParameters and a M4 Pro Macbook, took 5 hours and 30 minutes. Instead the fine-tuning of **MobileNet-v2**, with the same enviroment, took 1 hour and 40 minutes in total.
 
-### Results on Test-Dev
+### 4.7.1 Results on Test-Dev
 
 | Model          | Accuracy | Precision | Recall | F1-Score |
 |----------------|----------|-----------|--------|----------|
@@ -173,7 +173,7 @@ On the **Test-Dev** dataset, both fine-tuned models achieved very good results, 
 
 - **MobileNet-v2**, although slightly lower, also performed very well, with an accuracy of 99.44%, precision of 99.38%, recall of 99.65%, and an F1-score of 99.51%. This highlights the model's effectiveness and indicates that it also a very good option for our task
 
-### Results on Test-Challenge
+### 4.7.2 Results on Test-Challenge
 
 | Model          | Accuracy | Precision | Recall | F1-Score |
 |----------------|----------|-----------|--------|----------|
