@@ -63,3 +63,30 @@ A convolution layer attempts to learn filters in a 3D space, with 2 spatial dime
 These differences reflect the distinct goals of the two models: MobileNets are optimized for efficiency under tight computational constraints, while Xception leverages a more radical factorization of convolutions (with residual connections) to push performance on large-scale tasks.
 
 An in depth view of how the Xception model can be used is seen in the paper done by R. Helaly et al. [https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9329302&isnumber=9329288]
+
+## 1.3 Activation Functions in MobileNet, Xception, and CustomCNN
+Activation functions play a crucial role in deep neural networks by introducing non-linearity, enabling models to learn complex patterns and relationships in data. They affect the model’s learning capacity and overall performance. In this section, we examine the activation functions used in MobileNet, Xception, and the CustomCNN.
+
+### 1.3.1 Activation Function in MobileNet
+MobileNet uses the ReLU (Rectified Linear Unit) activation function. Each depthwise and pointwise convolution operation in MobileNet is followed by Batch Normalization (BN) and a ReLU activation, this is used for:
+
+ - Improving gradient flow: avoiding vanishing gradient problems that arise in deeper networks.
+ - Efficient computations: the ReLU function is simple to compute
+   
+ReLU is defined as $$ReLU(x)=max(0,x)$$
+it sets all negative inputs to zero while passing positive values unchanged. This simplicity contributes to the computational efficiency of MobileNet.
+
+### 1.3.2 Activation Function in Xception
+Xception also uses ReLU, but with a difference in its application compared to MobileNet:
+
+Unlike MobileNet, Xception does not apply a non-linearity (ReLU) between the depthwise and pointwise convolutions.
+This design decision is based on the hypothesis that depthwise convolution (which captures spatial correlations) and pointwise convolution (which captures cross-channel correlations) should be separately optimized without introducing additional non-linearity between them.
+However, after each convolution block, Xception still uses Batch Normalization followed by ReLU, similar to MobileNet.
+This difference contributes to faster convergence and better feature extraction.
+
+### 1.3.3 Activation Function in CustomCNN
+The CustomCNN defined by us also uses ReLU activation after the convolutional layer and batch normalization but before the max pooling operation, the sequence is:
+<div>
+ Convolutional layer → Batch normalization → ReLU → MaxPooling  
+</div>
+The ReLU activation function is also used after the first fully connected layer.
