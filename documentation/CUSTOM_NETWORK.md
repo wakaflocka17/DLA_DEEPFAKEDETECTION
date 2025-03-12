@@ -73,9 +73,9 @@ In this section, we illustrate the structure and motivation behind the custom CN
   </tbody>
 </table>
 
-![Risorsa 2-100](https://github.com/user-attachments/assets/5f3e7dbb-bac5-441c-9077-91324eef77dd)
-
 ## Network architecture
+![cnn](https://github.com/user-attachments/assets/5cddda27-3ae5-48cf-9289-2c10238a63ad)
+
 
 ### Convolutional Block 1
 ```PYTHON
@@ -106,6 +106,8 @@ We also experimented with a larger 7x7 kernel, but results did not show any impr
 Reduces the dimensionality of the image representation, decreasing computational load and capturing dominant features.  
 Using a 2x2 kernel halves the spatial dimensions of the feature map, reducing computations without losing essential information. Indeed, we select the maximum value for each sub-matrix. Thus, this kernel size ensures significant spatial reduction while retaining the fundamental information from our images.
 
+![1](https://github.com/user-attachments/assets/f72960a8-e3a6-4c58-ae29-544579e23f40)
+
 ### Convolutional Block 2
 ```PYTHON
 self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1)
@@ -126,6 +128,8 @@ Increases the network depth, allowing the capture of more complex and structured
 - **Max Pooling** (`MaxPool2d`)
   - Maintains the dimensionality reduction approach.
 
+![2](https://github.com/user-attachments/assets/99187562-3270-448a-a9d4-dcaa8c8be123)
+
 ### Convolutional Block 3
 ```PYTHON
 self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1)
@@ -145,6 +149,8 @@ This block is crucial for acquiring high-level features, enabling the network to
 
 - **Max Pooling** (`MaxPool2d`)
   - Completes the convolutional phase of the network, further reducing the spatial dimensions of feature maps, essential for minimizing overfitting.
+
+![3](https://github.com/user-attachments/assets/d272bf96-5b68-4c4e-b296-3d9e14c2a3ea)
 
 ### Fully Connected Layers
 ```PYTHON
@@ -173,6 +179,8 @@ The input we have is a vector of dimensions 128 × 28 × 28, meaning 128 feature
   - **Output**: 2 (binary classification)
 
 This final layer performs classification between real and deepfake images, providing the direct output required for decision-making.
+
+![4](https://github.com/user-attachments/assets/4434108d-c5fa-49b3-bafb-6cb3ecf2d9fc)
 
 ## Forward function
   ```PYTHON
