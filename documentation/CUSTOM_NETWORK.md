@@ -1,5 +1,5 @@
 # 🏗 5. BUILDING A NETWORK FROM SCRATCH
-## General description
+## 5.1 General description
 In this section, we illustrate the structure and motivation behind the custom CNN developed for detecting DeepFake images via binary classification, distinguishing between real and fake images.
 
 <table style="margin: auto; text-align: center;">
@@ -73,11 +73,11 @@ In this section, we illustrate the structure and motivation behind the custom CN
   </tbody>
 </table>
 
-## Network architecture
+## 5.2 Network architecture
 ![cnn](https://github.com/user-attachments/assets/5cddda27-3ae5-48cf-9289-2c10238a63ad)
 
 
-### Convolutional Block 1
+### 5.2.1 Convolutional Block 1
 ```PYTHON
 self.conv1 = nn.Conv2d(in_channels=3, out_channels=32, kernel_size=3, padding=1)
 self.bn1 = nn.BatchNorm2d(32)
@@ -108,7 +108,7 @@ Using a 2x2 kernel halves the spatial dimensions of the feature map, reducing co
 
 ![1](https://github.com/user-attachments/assets/f72960a8-e3a6-4c58-ae29-544579e23f40)
 
-### Convolutional Block 2
+### 5.2.2 Convolutional Block 2
 ```PYTHON
 self.conv2 = nn.Conv2d(in_channels=32, out_channels=64, kernel_size=3, padding=1)
 self.bn2 = nn.BatchNorm2d(64)
@@ -130,7 +130,7 @@ Increases the network depth, allowing the capture of more complex and structured
 
 ![2](https://github.com/user-attachments/assets/99187562-3270-448a-a9d4-dcaa8c8be123)
 
-### Convolutional Block 3
+### 5.2.3 Convolutional Block 3
 ```PYTHON
 self.conv3 = nn.Conv2d(in_channels=64, out_channels=128, kernel_size=3, padding=1)
 self.bn3 = nn.BatchNorm2d(128)
@@ -152,7 +152,7 @@ This block is crucial for acquiring high-level features, enabling the network to
 
 ![3](https://github.com/user-attachments/assets/d272bf96-5b68-4c4e-b296-3d9e14c2a3ea)
 
-### Fully Connected Layers
+### 5.2.4 Fully Connected Layers
 ```PYTHON
 self.fc1 = nn.Linear(128 * 28 * 28, 512)
 self.fc2 = nn.Linear(512, num_classes)
@@ -182,7 +182,7 @@ This final layer performs classification between real and deepfake images, provi
 
 ![4](https://github.com/user-attachments/assets/4434108d-c5fa-49b3-bafb-6cb3ecf2d9fc)
 
-## Forward function
+### 5.2.5 Forward function
   ```PYTHON
   def forward(self, x):
     x = self.pool1(F.relu(self.bn1(self.conv1(x))))
@@ -203,13 +203,13 @@ The `forward` function defines the sequence in which data pass through the netwo
 - → Flatten → FC1 → ReLU → Dropout  
 - → FC2 → Output  
 
-## Technology and motivation behind choices
+## 5.3 Technology and motivation behind choices
 - **PyTorch** was chosen for its flexibility and ease of CNN implementation, as well as for its widespread use and community support.
 - **Batch Normalization** significantly improves convergence speed, makes the network more robust to input variations, and allows higher learning rates.
 - **Max Pooling** reduces spatial dimensions while preserving relevant features, reducing the risk of overfitting.
 - **Dropout** is essential for network regularization, ensuring good generalization, particularly important for deepfake detection, where recognizing subtle and varied characteristics is crucial.
 
-## Results obtained
+## 5.4 Results obtained
 We tested the network on two different datasets, **Test-Dev** and **Test-Challenge**.  
 For training the network, we used the following hyperparameters and loss function:
 ```PYTHON
