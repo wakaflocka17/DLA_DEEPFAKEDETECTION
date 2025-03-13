@@ -16,6 +16,75 @@ DEVICE = torch.device(
     "cpu"
 )
 
+def plot_all_models(models=["mobilenet","xception","custom"]):
+    """
+    Genera due grafici separati per confrontare:
+    - Training Loss: curv di tutti i modelli
+    - Validation Accuracy: curve di tutti i modelli
+
+    Legge i rispettivi CSV salvati durante il training (es. logs/mobilenet_train_logs.csv)
+    e traccia tre linee per ciascun grafico (una per modello).
+    """
+    import csv
+    import os
+    import matplotlib.pyplot as plt
+
+    # Dizionario in cui memorizziamo i dati caricati: data[model_name] = { 'epochs': [...], 'loss': [...], 'acc': [...] }
+    data = {}
+
+    # 1) Carichiamo i file CSV per ogni modello
+    for model_name in models:
+        csv_path = f"logs/{model_name}_train_logs.csv"
+        if not os.path.exists(csv_path):
+            print(f"Log file {csv_path} not found. Skipping '{model_name}'.")
+            continue
+
+        epochs = []
+        train_losses = []
+        val_accs = []
+        with open(csv_path, 'r') as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                epochs.append(int(row["epoch"]))
+                train_losses.append(float(row["train_loss"]))
+                val_accs.append(float(row["val_accuracy"]))
+
+        data[model_name] = {
+            "epochs": epochs,
+            "loss": train_losses,
+            "acc": val_accs
+        }
+
+    # Se non è stato trovato alcun file, interrompiamo
+    if not data:
+        print("No data to plot. Make sure the CSV logs exist.")
+        return
+
+    # 2) PRIMO GRAFICO: Training Loss di tutti i modelli
+    plt.figure(figsize=(7,5))
+    for model_name, model_data in data.items():
+        plt.plot(model_data["epochs"], model_data["loss"], label=model_name)
+    plt.title("Training Loss Comparison")
+    plt.xlabel("Epoch")
+    plt.ylabel("Loss")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()  # oppure plt.savefig("loss_comparison.png"); plt.close()
+
+    # 3) SECONDO GRAFICO: Validation Accuracy di tutti i modelli
+    plt.figure(figsize=(7,5))
+    for model_name, model_data in data.items():
+        plt.plot(model_data["epochs"], model_data["acc"], label=model_name)
+    plt.title("Validation Accuracy Comparison")
+    plt.xlabel("Epoch")
+    plt.ylabel("Accuracy")
+    plt.ylim([0,1])  # se vuoi forzare il range 0..1
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()  # oppure plt.savefig("accuracy_comparison.png"); plt.close()
+
 def evaluate(model_name="mobilenet", dataset="Test-Dev"):
     """
     Valuta il modello deepfake su un dataset di test.
@@ -120,6 +189,13 @@ if __name__ == "__main__":
                         help="Scegli il modello: 'mobilenet', 'xception' o 'custom'")
     parser.add_argument("--dataset", type=str, choices=["Test-Dev", "Test-Challenge"], required=True,
                         help="Dataset: 'Test-Dev' o 'Test-Challenge'")
+    parser.add_argument("--plot_all", action="store_true",
+                        help="Se presente, genera un grafico di confronto globale per tutti i modelli")
     args = parser.parse_args()
 
+    # Esegui la valutazione per il singolo modello richiesto
     evaluate(args.model, args.dataset)
+
+    # Se l'utente richiede il confronto globale, chiama plot_all_models
+    if args.plot_all:
+        plot_all_models(["mobilenet", "xception", "custom"])
