@@ -227,7 +227,7 @@ The results obtained on **Test-Dev** are as follows:
 | ------------- | ------------- |
 | Accuracy  | 0.9716  |
 | Precision  | 0.9608 |
-| Recall   | 0.8913 |
+| Recall   | 0.9913 |
 | F1-score    | 0.9758 |
 
 The results obtained on **Test-Challenge** are as follows:
