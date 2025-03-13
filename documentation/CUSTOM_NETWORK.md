@@ -236,7 +236,7 @@ The results obtained on **Test-Challenge** are as follows:
 | ------------- | ------------- |
 | Accuracy  | 0.8278  |
 | Precision  | 0.8918 |
-| Recall   | 0.8918  |
+| Recall   | 0.8014  |
 | F1-score    | 0.8441  |
 
 We also implemented a Grad-CAM visualization to better understand the model's decision-making process, as shown below.
