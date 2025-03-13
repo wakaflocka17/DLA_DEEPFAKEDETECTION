@@ -225,9 +225,9 @@ The results obtained on **Test-Dev** are as follows:
 
 | Metrics  | Results |
 | ------------- | ------------- |
-| Accuracy  | 0.8278  |
-| Precision  | 0.8918 |
-| Recall   | 0.8918 |
+| Accuracy  | 0.9716  |
+| Precision  | 0.9608 |
+| Recall   | 0.8913 |
 | F1-score    | 0.9758 |
 
 The results obtained on **Test-Challenge** are as follows:
@@ -237,7 +237,7 @@ The results obtained on **Test-Challenge** are as follows:
 | Accuracy  | 0.8278  |
 | Precision  | 0.8918 |
 | Recall   | 0.8918  |
-| F1-score    | 0.9758  |
+| F1-score    | 0.8441  |
 
 We also implemented a Grad-CAM visualization to better understand the model's decision-making process, as shown below.
 
