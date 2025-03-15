@@ -18,6 +18,7 @@
 > 10. [📊 Project Goals](#-project-goals)
 > 11. [🖥️ Hardware and Limitations](#hardware-and-limitations)
 > 12. [🤝 Contributions](#-contributions)
+> 13. [❓ How to Cite](#-how-to-cite)
 
 ---
 
@@ -221,6 +222,7 @@ python3 scripts/evaluate.py --model custom --dataset Test-Challenge
 ## 📂 Project Structure  
 ```plaintext
 DLA_DEEPFAKEDETECTION/
+│── .github/            # DependenciesBot
 │── data/               # Dataset OpenForensics (originale, non modificato)
 │   ├── Train/          # Training Data
 │   ├── Val/            # Evaluation Data
@@ -243,6 +245,7 @@ DLA_DEEPFAKEDETECTION/
 │   │   ├── fake/       # Fake faces extracted for Test-Challenge
 │
 │── documentation/      # Documentation, reports, extra material
+│── logs/               # Folder to track the accuracy of the assessment and the loss you have during training
 │── models/             # Saved models (es. file .pth)
 │── scripts/            # Scripts (training, preprocessing, ecc.)
 │── notebooks/          # Jupyter Notebook for debugging and testing
@@ -291,5 +294,14 @@ Feel free to contribute to the project! 💡
    ```
 6. Open a Pull Request on GitHub.
 
-
-
+## ❓ How to Cite
+If you use this repository (or part of its code) for your research, a scholarly publication, or a project, please kindly cite us. You can use the following BibTeX entry (adjust the fields to suit your needs):
+```bibtex
+@misc{Deepfake detection Analysis using the OpenForensics dataset,
+  author       = {Congiu F., Giuffrida S., Littera F.},
+  title        = {Deepfake Detection Project using the OpenForensics dataset},
+  howpublished = {\url{https://github.com/wakaflocka17/DLA_DEEPFAKEDETECTION}},
+  year         = {2025}
+}
+```
+Or, if you prefer not to use BibTeX, feel free to mention the authors and the link to the repository in the acknowledgments or bibliography of your paper.
