@@ -196,7 +196,6 @@ This final layer performs classification between real and deepfake images, provi
     return x
   ```
 The `forward` function defines the sequence in which data pass through the network layers:
-
 - Input → Conv1 → BN1 → ReLU → Pool1  
 - → Conv2 → BN2 → ReLU → Pool2  
 - → Conv3 → BN3 → ReLU → Pool3  
@@ -208,48 +207,4 @@ The `forward` function defines the sequence in which data pass through the netwo
 - **Batch Normalization** significantly improves convergence speed, makes the network more robust to input variations, and allows higher learning rates.
 - **Max Pooling** reduces spatial dimensions while preserving relevant features, reducing the risk of overfitting.
 - **Dropout** is essential for network regularization, ensuring good generalization, particularly important for deepfake detection, where recognizing subtle and varied characteristics is crucial.
-
-## 5.4 Results obtained
-We tested the network on two different datasets, **Test-Dev** and **Test-Challenge**.  
-For training the network, we used the following hyperparameters and loss function:
-```PYTHON
-BATCH_SIZE = 32
-EPOCHS = 10
-LEARNING_RATE = 1e-4
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=LEARNING_RATE)
-```
-We experimented with implementing data augmentation and early stopping, but the evaluation results were unsatisfactory—worse than the baseline network—so we decided not to implement these strategies in the final training.
-
-The results obtained on **Test-Dev** are as follows:
-
-| Metrics  | Results |
-| ------------- | ------------- |
-| Accuracy  | 0.9716  |
-| Precision  | 0.9608 |
-| Recall   | 0.9913 |
-| F1-score    | 0.9758 |
-
-The results obtained on **Test-Challenge** are as follows:
-
-| Metrics  | Results |
-| ------------- | ------------- |
-| Accuracy  | 0.8278  |
-| Precision  | 0.8918 |
-| Recall   | 0.8014  |
-| F1-score    | 0.8441  |
-
-We also implemented a Grad-CAM visualization to better understand the model's decision-making process, as shown below.
-
-**Fake Image**:
-
-![fake_gradcam_side_by_side](https://github.com/user-attachments/assets/128f4ee4-3a7a-4e8c-bebe-1d8d56c3a10a)
-
-We can observe that the network primarily focuses its attention on the faces, particularly details and edges: it appears the model is identifying potential anomalies within the image.
-
-**Real Image**:
-
-![real_gradcam_side_by_side](https://github.com/user-attachments/assets/bbf226fc-fc3c-4f76-9e5c-f0d9e85a5abf)
-
-Conversely, in the second image, representing a genuine image, the network spreads its attention more evenly, covering multiple relevant areas of the image. This suggests that the network recognizes the image as real and thus processes it more globally, rather than focusing on specific details.
 
