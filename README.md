@@ -297,7 +297,7 @@ Feel free to contribute to the project! 💡
 ## ❓ How to Cite
 If you use this repository (or part of its code) for your research, a scholarly publication, or a project, please kindly cite us. You can use the following BibTeX entry (adjust the fields to suit your needs):
 ```bibtex
-@misc{Deepfake detection Analysis using the OpenForensics dataset,
+@misc{Deepfake-Project,
   author       = {Congiu F., Giuffrida S., Littera F.},
   title        = {Deepfake Detection Project using the OpenForensics dataset},
   howpublished = {\url{https://github.com/wakaflocka17/DLA_DEEPFAKEDETECTION}},
