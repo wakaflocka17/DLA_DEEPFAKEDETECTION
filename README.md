@@ -59,6 +59,7 @@ Below are links to the full project documentation:
 - 📊 [Metadata Analysis](documentation/METADATA_ANALYSIS.md)
 - 🎯 [Fine Tuning of MobileNet and xCeption](documentation/FINE_TUNING.md)
 - 🏗 [Building a Network from scratch](documentation/CUSTOM_NETWORK.md)
+- 🔍 [Analysis and Experimental results](documentation/RESULT_ANALYSIS.md)
 
 📂 **[Cartella con tutta la documentazione](documentation/)**
 
