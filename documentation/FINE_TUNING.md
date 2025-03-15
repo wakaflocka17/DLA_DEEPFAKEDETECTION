@@ -153,37 +153,3 @@ This method allows every layer of the network to fully adapt to the unique chara
 Compared to retraining the last layers (feature extraction), complete fine-tuning enables the network to capture precise features, significantly enhancing generalization and robustness. 
 
 Furthermore, having a large number of training images allows us to effectively update all model parameters,  maximizing the system's accuracy in distinguishing between real and manipulated images.
-
----
-
-## 4.7 Evaluation Results
-
-The fine-tuning of **Xception**, with our HyperParameters and a M4 Pro Macbook, took 5 hours and 30 minutes. Instead the fine-tuning of **MobileNet-v2**, with the same enviroment, took 1 hour and 40 minutes in total.
-
-### 4.7.1 Results on Test-Dev
-
-| Model          | Accuracy | Precision | Recall | F1-Score |
-|----------------|----------|-----------|--------|----------|
-| MobileNet-v2     | 0.9944   | 0.9938    | 0.9965 | 0.9951   |
-| Xception       | 0.9966   | 0.9966    | 0.9975 | 0.9970   |
-
-On the **Test-Dev** dataset, both fine-tuned models achieved very good results, showing their strong ability to distinguish between real and manipulated images in relatively controlled and clean conditions.
-
-- **Xception** achieved slightly superior performance compared to MobileNet-v2, recording almost perfect accuracy (99.66%), precision (99.66%), recall (99.75%), and F1-score (99.70%). These metrics confirm Xception capability to capture visual anomalies typical of DeepFake manipulations.
-
-- **MobileNet-v2**, although slightly lower, also performed very well, with an accuracy of 99.44%, precision of 99.38%, recall of 99.65%, and an F1-score of 99.51%. This highlights the model's effectiveness and indicates that it also a very good option for our task
-
-### 4.7.2 Results on Test-Challenge
-
-| Model          | Accuracy | Precision | Recall | F1-Score |
-|----------------|----------|-----------|--------|----------|
-| MobileNet-v2   | 0.8364   | 0.9670    | 0.7442 | 0.8411   |
-| Xception       | 0.8023   | 0.9725    | 0.6795 | 0.8000   |
-
-The **Test-Challenge** dataset introduces a realistic and complex scenario, including augmentations, noise, and visual distortions.
-
-- We can see that **MobileNet-v2** has better perfomances than Xception, achieving higher accuracy (83.64% vs. 80.23%), recall (74.42% vs. 67.95%), and F1-score (84.11% vs. 80.00%). Although precision was slightly lower than Xception (96.70% vs. 97.25%), MobileNet-v2’s recall show us that it is more successful at correctly identifying deepfake images under realistic, noisy conditions.
-
-- **Xception**, despite having slightly higher precision, demonstrated difficulty in recognizing manipulated images accurately. Its lower recall score (67.95%) indicates that it missed several challenging deepfake samples, affecting overall accuracy and F1-score.
-
----
