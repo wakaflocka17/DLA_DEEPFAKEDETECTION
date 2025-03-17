@@ -25,9 +25,6 @@ def plot_all_models(models=["mobilenet","xception","custom"]):
     Legge i rispettivi CSV salvati durante il training (es. logs/mobilenet_train_logs.csv)
     e traccia tre linee per ciascun grafico (una per modello).
     """
-    import csv
-    import os
-    import matplotlib.pyplot as plt
 
     # Dizionario in cui memorizziamo i dati caricati: data[model_name] = { 'epochs': [...], 'loss': [...], 'acc': [...] }
     data = {}
