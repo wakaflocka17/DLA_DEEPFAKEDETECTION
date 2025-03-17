@@ -82,7 +82,7 @@ Throughout the training process, we monitored both the loss on the training set 
 As shown in the previous Figure, the **MobileNet** and **Xception** models - both initialized with ImageNet-pretrained weights - demonstrated a rapid decrease in training loss, converging to near-zero values by the end of training. Instead, the **Custom CNN**, which was trained from scratch, began with a notably higher loss but improved in each epoch. As we can see in the plot, we have trained each model with 10 epochs.
 
 <p align="center">
-  <img src="../utils/images/Validation_Plot_Comparison.png" alt="Image" width="500">
+  <img src="../utils/images/custom2.png" alt="Image" width="500">
 </p>
 
 Interestingly, despite these differences in the first epochs training loss curves, all three models achieved high accuracy on the validation set (previous Figure), with values nearing or exceeding 0.95 by the final epoch. This suggests that the Custom CNN, although slower to reduce its loss, was still able to learn discriminative features effectively enough to perform well on the validation data.
