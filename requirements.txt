@@ -10,7 +10,7 @@ pillow==11.1.0
 sympy==1.13.1
 torch==2.6.0
 torchaudio==2.2.2
-torchvision==0.17.2
+torchvision==0.21.0
 typing_extensions==4.12.2
 
 # Download dataset
