@@ -295,7 +295,7 @@ Feel free to contribute to the project! 💡
 6. Open a Pull Request on GitHub.
 
 ## ❓ How to Cite
-If you use this repository (or part of its code) for your research, a scholarly publication, or a project, please kindly cite us. You can use the following BibTeX entry (adjust the fields to suit your needs):
+If you use this repository (or part of its code) for your research, a scholarly publication, or a project, please kindly cite us. You can use the following BibTeX entry:
 ```bibtex
 @misc{Deepfake-Project,
   author       = {Congiu F., Giuffrida S., Littera F.},
