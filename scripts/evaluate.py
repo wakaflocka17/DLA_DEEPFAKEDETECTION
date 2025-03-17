@@ -74,16 +74,32 @@ def plot_all_models(models=["mobilenet","xception","custom"]):
 
     # 3) SECONDO GRAFICO: Validation Accuracy di tutti i modelli
     plt.figure(figsize=(7,5))
+
+    all_acc_values = []
     for model_name, model_data in data.items():
         plt.plot(model_data["epochs"], model_data["acc"], label=model_name)
+        all_acc_values.extend(model_data["acc"])
+
     plt.title("Validation Accuracy Comparison")
     plt.xlabel("Epoch")
     plt.ylabel("Accuracy")
-    plt.ylim([0,1])  # se vuoi forzare il range 0..1
+
+    # Calcoliamo min e max di TUTTE le accuracy
+    min_acc = min(all_acc_values)
+    max_acc = max(all_acc_values)
+
+    # Impostiamo un piccolo margine per non tagliare i punti estremi
+    margin = 0.01
+    lower_ylim = max(0, min_acc - margin)
+    upper_ylim = min(1, max_acc + margin)
+
+    plt.ylim([lower_ylim, upper_ylim])  # Imposta i limiti dinamici
+
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.show()  # oppure plt.savefig("accuracy_comparison.png"); plt.close()
+    plt.show()
+
 
 def evaluate(model_name="mobilenet", dataset="Test-Dev"):
     """
@@ -136,7 +152,7 @@ def evaluate(model_name="mobilenet", dataset="Test-Dev"):
 def plot_training_curves(model_name):
     """
     Legge i log di training (loss e accuracy) dal CSV e mostra un grafico
-    con Training Loss e Validation Accuracy in funzione dell'epoca.
+    con Training Loss e Validation Accuracy in funzione dell'epoca per il singolo modello.
     """
     csv_file = f"logs/{model_name}_train_logs.csv"
     if not os.path.exists(csv_file):
@@ -155,7 +171,7 @@ def plot_training_curves(model_name):
             train_losses.append(float(row["train_loss"]))
             val_accuracies.append(float(row["val_accuracy"]))
 
-    # Plot con matplotlib
+    # Creiamo una figura con due subplot affiancati
     plt.figure(figsize=(12,5))
 
     # Subplot 1: Training Loss
@@ -165,33 +181,25 @@ def plot_training_curves(model_name):
     plt.xlabel('Epoch')
     plt.ylabel('Loss')
     plt.legend()
+    plt.grid(True)
 
     # Subplot 2: Validation Accuracy
-    plt.figure(figsize=(12,5))
-
-    all_acc_values = []  # conterrà tutte le accuracy di tutti i modelli
-    for model_name, model_data in data.items():
-        plt.plot(model_data["epochs"], model_data["acc"], label=model_name)
-        all_acc_values.extend(model_data["acc"])
-
-    plt.title("Validation Accuracy Comparison")
-    plt.xlabel("Epoch")
-    plt.ylabel("Accuracy")
-
-    # Calcoliamo il min e max di TUTTE le accuracy
-    min_acc = min(all_acc_values)
-    max_acc = max(all_acc_values)
-
-    # Definiamo un margine di “buffer” per non tagliare i punti estremi
+    plt.subplot(1,2,2)
+    plt.plot(epochs, val_accuracies, label='Validation Accuracy', color='blue')
+    plt.title(f'{model_name} - Validation Accuracy')
+    plt.xlabel('Epoch')
+    plt.ylabel('Accuracy')
+    plt.grid(True)
+    
+    # Calcolo dei limiti dinamici per l'asse y
+    min_acc = min(val_accuracies)
+    max_acc = max(val_accuracies)
     margin = 0.01
     lower_ylim = max(0, min_acc - margin)
     upper_ylim = min(1, max_acc + margin)
-
-    # Impostiamo dinamicamente i limiti dell’asse y
     plt.ylim([lower_ylim, upper_ylim])
-
+    
     plt.legend()
-    plt.grid(True)
     plt.tight_layout()
     plt.show()
 
