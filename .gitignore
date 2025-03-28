@@ -20,3 +20,5 @@ __pycache__/
 .DS_Store
 *.pyc
 models/*.pth
+models/xception_deepfake.pth
+models/mobilenet_deepfake.pth
