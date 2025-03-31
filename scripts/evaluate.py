@@ -16,6 +16,54 @@ DEVICE = torch.device(
     "cpu"
 )
 
+def plot_accuracy_vs_resolution(model_name="custom", dataset="Test-Dev", resolutions=[64, 128, 256, 512]):
+    """
+    Valuta il modello deepfake per diverse risoluzioni delle immagini e traccia un grafico di Accuracy vs. Risoluzione.
+    
+    Args:
+        model_name (str): Nome del modello ('mobilenet', 'xception' o 'custom').
+        dataset (str): Nome del dataset di test, ad esempio 'Test-Dev' o 'Test-Challenge'.
+        resolutions (list): Lista di risoluzioni (larghezza/altezza in pixel, assumendo immagini quadrate) da valutare.
+    """
+    accuracies = []
+
+    # Per ogni risoluzione, creiamo un dataloader che ridimensiona le immagini a quella risoluzione
+    for res in resolutions:
+        print(f"\nValutazione a risoluzione {res}x{res}...")
+        # Si assume che create_dataloader accetti il parametro "resolution" per applicare la trasformazione
+        test_loader = create_dataloader(f"processed_data/{dataset}", batch_size=32, shuffle=False, resolution=res)
+        
+        # Carichiamo il modello e i relativi pesi
+        model = get_model(model_name).to(DEVICE)
+        model.load_state_dict(torch.load(f"models/{model_name}_deepfake.pth", map_location=DEVICE))
+        model.eval()
+
+        all_preds = []
+        all_labels = []
+        with torch.no_grad():
+            for images, labels in test_loader:
+                images, labels = images.to(DEVICE), labels.to(DEVICE)
+                outputs = model(images)
+                _, preds = torch.max(outputs, 1)
+                all_preds.extend(preds.cpu().numpy())
+                all_labels.extend(labels.cpu().numpy())
+        
+        # Calcoliamo l'accuratezza per questa risoluzione
+        acc = accuracy_score(all_labels, all_preds)
+        accuracies.append(acc)
+        print(f"Risoluzione {res}x{res} - Accuracy: {acc:.4f}")
+
+    # Tracciamo il grafico: Risoluzione in x e Accuracy in y
+    plt.figure(figsize=(7, 5))
+    plt.plot(resolutions, accuracies, marker='o')
+    plt.title(f"Accuracy vs. Risoluzione Immagine ({model_name})")
+    plt.xlabel("Risoluzione Immagine (px)")
+    plt.ylabel("Accuracy")
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
 def plot_all_models(models=["mobilenet","xception","custom"]):
     """
     Genera due grafici separati per confrontare:
@@ -223,3 +271,6 @@ if __name__ == "__main__":
     # Se l'utente richiede il confronto globale, chiama plot_all_models
     if args.plot_all:
         plot_all_models(["mobilenet", "xception", "custom"])
+
+    # Esegui la valutazione dell'Accuracy al variare della risoluzione dell'immagine
+    plot_accuracy_vs_resolution(model_name="custom", dataset="Test-Dev", resolutions=[64, 128, 256, 512])
